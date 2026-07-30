@@ -1,0 +1,28 @@
+package com.steadyme.app.data;
+
+import androidx.annotation.NonNull;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.*;
+import com.steadyme.app.model.MoodLog;
+import java.util.*;
+
+/** Centralizes authenticated Firestore access; UI never supplies a uid. */
+public class FirebaseRepository {
+    public interface LogsCallback { void onLoaded(List<MoodLog> logs); void onError(Exception error); }
+    public interface SaveCallback { void onSaved(); void onError(Exception error); }
+    private final FirebaseAuth auth=FirebaseAuth.getInstance();
+    private final FirebaseFirestore db=FirebaseFirestore.getInstance();
+    private CollectionReference logs(){ FirebaseUser user=auth.getCurrentUser(); if(user==null) throw new IllegalStateException("Please sign in first."); return db.collection("users").document(user.getUid()).collection("moodLogs"); }
+    public void saveMood(@NonNull MoodLog log, @NonNull SaveCallback callback){
+        try { logs().add(log).addOnSuccessListener(ref -> callback.onSaved()).addOnFailureListener(callback::onError); }
+        catch (Exception e) { callback.onError(e); }
+    }
+    public ListenerRegistration observeMoodLogs(@NonNull LogsCallback callback){
+        try { return logs().orderBy("createdAt", Query.Direction.DESCENDING).addSnapshotListener((snap,e)-> { if(e!=null){callback.onError(e);return;} List<MoodLog> result=new ArrayList<>(); if(snap!=null) for(DocumentSnapshot d:snap.getDocuments()){MoodLog log=d.toObject(MoodLog.class);if(log!=null){log.setId(d.getId());result.add(log);}} callback.onLoaded(result); }); }
+        catch(Exception e){ callback.onError(e); return null; }
+    }
+    public void createProfile(String name){ FirebaseUser user=auth.getCurrentUser(); if(user!=null) db.collection("users").document(user.getUid()).set(new HashMap<String,Object>(){{put("name",name);put("email",user.getEmail());put("createdAt", FieldValue.serverTimestamp());}}, SetOptions.merge()); }
+}

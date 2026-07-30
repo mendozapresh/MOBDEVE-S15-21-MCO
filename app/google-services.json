@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "901253445586",
+    "project_id": "mobdeve-mco3-f02ea",
+    "storage_bucket": "mobdeve-mco3-f02ea.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901253445586:android:75fd0e5d945a1679173a0b",
+        "android_client_info": {
+          "package_name": "com.mobdeve.s15.esquillo.faith.mobdeve_mco3_new"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNdWtjG9gjM6KRSP2--4k2t9Ocji2ykVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

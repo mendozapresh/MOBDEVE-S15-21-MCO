@@ -1,0 +1,54 @@
+[
+    {
+        "merged": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-mergeDebugResources-51:/layout/activity_login.xml",
+        "source": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-main-54:/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-mergeDebugResources-51:/layout/fragment_log_options.xml",
+        "source": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-main-54:/layout/fragment_log_options.xml"
+    },
+    {
+        "merged": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-mergeDebugResources-51:/layout/fragment_insights.xml",
+        "source": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-main-54:/layout/fragment_insights.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/activity_add_note.xml",
+        "source": "com.steadyme.app-main-54:/layout/activity_add_note.xml"
+    },
+    {
+        "merged": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-mergeDebugResources-51:/layout/fragment_history.xml",
+        "source": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-main-54:/layout/fragment_history.xml"
+    },
+    {
+        "merged": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-mergeDebugResources-51:/layout/fragment_home.xml",
+        "source": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-main-54:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-mergeDebugResources-51:/layout/activity_signup.xml",
+        "source": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-main-54:/layout/activity_signup.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/activity_entry_saved.xml",
+        "source": "com.steadyme.app-main-54:/layout/activity_entry_saved.xml"
+    },
+    {
+        "merged": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-mergeDebugResources-51:/layout/item_mood_log.xml",
+        "source": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-main-54:/layout/item_mood_log.xml"
+    },
+    {
+        "merged": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-mergeDebugResources-51:/layout/activity_main.xml",
+        "source": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-main-54:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-mergeDebugResources-51:/layout/activity_camera_log.xml",
+        "source": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-main-54:/layout/activity_camera_log.xml"
+    },
+    {
+        "merged": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-mergeDebugResources-51:/layout/fragment_manual_log.xml",
+        "source": "/Users/faithesquillo/.gradle/daemon/9.3.0/com.steadyme.app-main-54:/layout/fragment_manual_log.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/activity_camera_log.xml",
+        "source": "com.steadyme.app-main-54:/layout/activity_camera_log.xml"
+    }
+]

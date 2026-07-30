@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">901253445586</string>
+    <string name="google_api_key" translatable="false">AIzaSyBNdWtjG9gjM6KRSP2--4k2t9Ocji2ykVg</string>
+    <string name="google_app_id" translatable="false">1:901253445586:android:75fd0e5d945a1679173a0b</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBNdWtjG9gjM6KRSP2--4k2t9Ocji2ykVg</string>
+    <string name="google_storage_bucket" translatable="false">mobdeve-mco3-f02ea.firebasestorage.app</string>
+    <string name="project_id" translatable="false">mobdeve-mco3-f02ea</string>
+</resources>
