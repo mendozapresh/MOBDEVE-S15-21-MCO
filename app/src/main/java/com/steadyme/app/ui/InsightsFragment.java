@@ -1,2 +1,292 @@
-package com.steadyme.app.ui;import android.graphics.Color;import android.os.Bundle;import android.view.*;import androidx.annotation.*;import androidx.fragment.app.Fragment;import com.github.mikephil.charting.components.XAxis;import com.github.mikephil.charting.data.*;import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;import com.google.android.material.snackbar.Snackbar;import com.google.firebase.firestore.ListenerRegistration;import com.steadyme.app.data.FirebaseRepository;import com.steadyme.app.databinding.FragmentInsightsBinding;import com.steadyme.app.model.MoodLog;import java.text.*;import java.util.*;
-public class InsightsFragment extends Fragment{private FragmentInsightsBinding binding;private ListenerRegistration registration;@Nullable @Override public View onCreateView(@NonNull LayoutInflater i,@Nullable ViewGroup c,@Nullable Bundle s){binding=FragmentInsightsBinding.inflate(i,c,false);return binding.getRoot();}@Override public void onViewCreated(@NonNull View v,@Nullable Bundle s){registration=new FirebaseRepository().observeMoodLogs(new FirebaseRepository.LogsCallback(){public void onLoaded(List<MoodLog> logs){render(logs);}public void onError(Exception e){Snackbar.make(binding.getRoot(),e.getMessage(),Snackbar.LENGTH_LONG).show();}});}@Override public void onDestroyView(){if(registration!=null)registration.remove();binding=null;super.onDestroyView();}private void render(List<MoodLog> logs){List<Entry> entries=new ArrayList<>();List<String> labels=new ArrayList<>();int shown=Math.min(7,logs.size());for(int i=0;i<shown;i++){MoodLog log=logs.get(shown-1-i);entries.add(new Entry(i,log.getScore()));labels.add(log.getCreatedAt()==null?"Now":new SimpleDateFormat("MMM d",Locale.getDefault()).format(log.getCreatedAt().toDate()));}LineDataSet data=new LineDataSet(entries,"Mood score");data.setColor(Color.rgb(142,185,90));data.setCircleColor(Color.rgb(142,185,90));data.setLineWidth(3f);binding.chartMood.setData(new LineData(data));binding.chartMood.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));binding.chartMood.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);binding.chartMood.getAxisRight().setEnabled(false);binding.chartMood.getDescription().setEnabled(false);binding.chartMood.invalidate();binding.tvInsightSummary.setText(logs.isEmpty()?"Log a mood to see your trends.":"Based on your last "+shown+" check-ins.");}}
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#FFFFFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvInsightsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Insights"
+            android:textColor="#000000"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvInsightSummary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Your emotional patterns at a glance"
+            android:textColor="#666666"
+            app:layout_constraintTop_toBottomOf="@id/tvInsightsTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 1. Top 3 Counters -->
+        <LinearLayout
+            android:id="@+id/llTopCounters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintTop_toBottomOf="@id/tvInsightSummary">
+
+            <!-- Total Logs Box -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="#F5F5F5"
+                android:padding="12dp"
+                android:layout_marginEnd="8dp">
+                <TextView
+                    android:id="@+id/tvTotalLogs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="14"
+                    android:textColor="#000000"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TOTAL LOGS"
+                    android:textColor="#666666"
+                    android:textSize="10sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <!-- Day Streak Box -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="#F5F5F5"
+                android:padding="12dp"
+                android:layout_marginEnd="8dp">
+                <TextView
+                    android:id="@+id/tvDayStreak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="14d"
+                    android:textColor="#000000"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DAY STREAK"
+                    android:textColor="#666666"
+                    android:textSize="10sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <!-- This Week Box -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="#F5F5F5"
+                android:padding="12dp">
+                <TextView
+                    android:id="@+id/tvThisWeek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="7/7"
+                    android:textColor="#000000"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="THIS WEEK"
+                    android:textColor="#666666"
+                    android:textSize="10sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 2. Dynamic Description Card -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clDynamicDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="#F5F5F5"
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@id/llTopCounters">
+
+            <TextView
+                android:id="@+id/tvDynamicTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="Significant Mood Swing"
+                android:textStyle="bold"
+                android:textColor="#FF9800"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/tvDynamicDesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="#333333"
+                tools:text="A large mood shift was detected in recent entries."
+                app:layout_constraintTop_toBottomOf="@id/tvDynamicTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 3. Existing Mood Trend LineChart -->
+        <LinearLayout
+            android:id="@+id/llTrendContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#F5F5F5"
+            android:padding="16dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/clDynamicDesc">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mood Trend"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chartMood"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="12dp" />
+        </LinearLayout>
+
+        <!-- 4. Mood Distribution PieChart -->
+        <LinearLayout
+            android:id="@+id/llDistributionContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#F5F5F5"
+            android:padding="16dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/llTrendContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mood Distribution"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chartMoodDistribution"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginTop="12dp" />
+        </LinearLayout>
+
+        <!-- 5. Mood Consistency -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clConsistency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="#F5F5F5"
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@id/llDistributionContainer">
+
+            <TextView
+                android:id="@+id/tvConsistencyHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mood Consistency"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvAvgThisWeek"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="#666666"
+                tools:text="AVG THIS WEEK\nN/A"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@id/tvConsistencyHeader"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tvStability" />
+
+            <TextView
+                android:id="@+id/tvStability"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="#4CAF50"
+                android:textStyle="bold"
+                tools:text="STABILITY\nHighly Stable"
+                android:textAlignment="center"
+                app:layout_constraintTop_toTopOf="@id/tvAvgThisWeek"
+                app:layout_constraintStart_toEndOf="@id/tvAvgThisWeek"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Consistency Score Progress Bar -->
+            <TextView
+                android:id="@+id/tvScoreLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Consistency Score"
+                android:textColor="#666666"
+                app:layout_constraintTop_toBottomOf="@id/tvAvgThisWeek"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvScorePercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="85%"
+                android:textColor="#4CAF50"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/tvScoreLabel"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/pbConsistency"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:max="100"
+                android:progressTint="#4CAF50"
+                app:layout_constraintTop_toBottomOf="@id/tvScoreLabel" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
