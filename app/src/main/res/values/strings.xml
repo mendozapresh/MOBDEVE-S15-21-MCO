@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SteadyMe</string>
+    <string name="app_name_styled">Steady<b>Me</b></string>
+    <string name="firebase_setup">Add your Firebase google-services.json to the app folder before building.</string>
+</resources>
