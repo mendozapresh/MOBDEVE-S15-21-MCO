@@ -1,292 +1,199 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="#FFFFFF">
+package com.steadyme.app.ui;
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp">
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.*;
+import androidx.annotation.*;
+import androidx.fragment.app.Fragment;
 
-        <TextView
-            android:id="@+id/tvInsightsTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Insights"
-            android:textColor="#000000"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.*;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.steadyme.app.data.FirebaseRepository;
+import com.steadyme.app.databinding.FragmentInsightsBinding;
+import com.steadyme.app.model.MoodLog;
 
-        <TextView
-            android:id="@+id/tvInsightSummary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Your emotional patterns at a glance"
-            android:textColor="#666666"
-            app:layout_constraintTop_toBottomOf="@id/tvInsightsTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
-        <!-- 1. Top 3 Counters -->
-        <LinearLayout
-            android:id="@+id/llTopCounters"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            app:layout_constraintTop_toBottomOf="@id/tvInsightSummary">
+public class InsightsFragment extends Fragment {
 
-            <!-- Total Logs Box -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="#F5F5F5"
-                android:padding="12dp"
-                android:layout_marginEnd="8dp">
-                <TextView
-                    android:id="@+id/tvTotalLogs"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="14"
-                    android:textColor="#000000"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TOTAL LOGS"
-                    android:textColor="#666666"
-                    android:textSize="10sp"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
+    private FragmentInsightsBinding binding;
+    private ListenerRegistration registration;
 
-            <!-- Day Streak Box -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="#F5F5F5"
-                android:padding="12dp"
-                android:layout_marginEnd="8dp">
-                <TextView
-                    android:id="@+id/tvDayStreak"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="14d"
-                    android:textColor="#000000"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="DAY STREAK"
-                    android:textColor="#666666"
-                    android:textSize="10sp"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
+        binding = FragmentInsightsBinding.inflate(i, c, false);
+        return binding.getRoot();
+    }
 
-            <!-- This Week Box -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="#F5F5F5"
-                android:padding="12dp">
-                <TextView
-                    android:id="@+id/tvThisWeek"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="7/7"
-                    android:textColor="#000000"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="THIS WEEK"
-                    android:textColor="#666666"
-                    android:textSize="10sp"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-        </LinearLayout>
+    @Override
+    public void onViewCreated(@NonNull View v, @Nullable Bundle s) {
+        // The repository handles the background threading, delivering the result back to the Main Thread safely
+        registration = new FirebaseRepository().observeMoodLogs(new FirebaseRepository.LogsCallback() {
+            public void onLoaded(List<MoodLog> logs) {
+                render(logs);
+            }
 
-        <!-- 2. Dynamic Description Card -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clDynamicDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="#F5F5F5"
-            android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@id/llTopCounters">
+            public void onError(Exception e) {
+                Snackbar.make(binding.getRoot(), e.getMessage(), Snackbar.LENGTH_LONG).show();
+            }
+        });
+    }
 
-            <TextView
-                android:id="@+id/tvDynamicTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                tools:text="Significant Mood Swing"
-                android:textStyle="bold"
-                android:textColor="#FF9800"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+    @Override
+    public void onDestroyView() {
+        if (registration != null) registration.remove();
+        binding = null; // Prevent memory leaks as taught in ViewBinding lessons
+        super.onDestroyView();
+    }
 
-            <TextView
-                android:id="@+id/tvDynamicDesc"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="#333333"
-                tools:text="A large mood shift was detected in recent entries."
-                app:layout_constraintTop_toBottomOf="@id/tvDynamicTitle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    private void render(List<MoodLog> logs) {
+        if (logs == null || logs.isEmpty()) {
+            binding.tvInsightSummary.setText("Log a mood to see your trends.");
+            return;
+        }
 
-        <!-- 3. Existing Mood Trend LineChart -->
-        <LinearLayout
-            android:id="@+id/llTrendContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#F5F5F5"
-            android:padding="16dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/clDynamicDesc">
+        // --- 1. POPULATE EXISTING LINE CHART ---
+        List<Entry> entries = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
+        int shown = Math.min(14, logs.size());
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mood Trend"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:textSize="18sp" />
+        for (int i = 0; i < shown; i++) {
+            MoodLog log = logs.get(shown - 1 - i);
+            entries.add(new Entry(i, log.getScore()));
+            labels.add(log.getCreatedAt() == null ? "Now" : new SimpleDateFormat("MMM d", Locale.getDefault()).format(log.getCreatedAt().toDate()));
+        }
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/chartMood"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="12dp" />
-        </LinearLayout>
+        LineDataSet data = new LineDataSet(entries, "Mood score");
+        data.setColor(Color.rgb(142, 185, 90));
+        data.setCircleColor(Color.rgb(142, 185, 90));
+        data.setLineWidth(3f);
+        binding.chartMood.setData(new LineData(data));
+        binding.chartMood.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
+        binding.chartMood.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        binding.chartMood.getAxisRight().setEnabled(false);
+        binding.chartMood.getDescription().setEnabled(false);
+        binding.chartMood.invalidate();
 
-        <!-- 4. Mood Distribution PieChart -->
-        <LinearLayout
-            android:id="@+id/llDistributionContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#F5F5F5"
-            android:padding="16dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/llTrendContainer">
+        binding.tvInsightSummary.setText("Based on your last " + shown + " check-ins.");
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mood Distribution"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:textSize="18sp" />
+        // --- 2. CALCULATE TOP METRICS & DISTRIBUTIONS ---
+        binding.tvTotalLogs.setText(String.valueOf(logs.size()));
 
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/chartMoodDistribution"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginTop="12dp" />
-        </LinearLayout>
+        int logsThisWeek = 0;
+        int currentStreak = 0;
+        long currentTime = System.currentTimeMillis();
+        long oneWeekAgo = currentTime - TimeUnit.DAYS.toMillis(7);
 
-        <!-- 5. Mood Consistency -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clConsistency"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="#F5F5F5"
-            android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@id/llDistributionContainer">
+        Map<String, Integer> emotionDistribution = new HashMap<>();
 
-            <TextView
-                android:id="@+id/tvConsistencyHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mood Consistency"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+        // Assuming logs are sorted newest to oldest
+        Date previousLogDate = null;
+        for (MoodLog log : logs) {
+            Date logDate = log.getCreatedAt() != null ? log.getCreatedAt().toDate() : new Date();
 
-            <TextView
-                android:id="@+id/tvAvgThisWeek"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textColor="#666666"
-                tools:text="AVG THIS WEEK\nN/A"
-                android:textAlignment="center"
-                app:layout_constraintTop_toBottomOf="@id/tvConsistencyHeader"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tvStability" />
+            // Weekly count
+            if (logDate.getTime() >= oneWeekAgo) {
+                logsThisWeek++;
+            }
 
-            <TextView
-                android:id="@+id/tvStability"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textColor="#4CAF50"
-                android:textStyle="bold"
-                tools:text="STABILITY\nHighly Stable"
-                android:textAlignment="center"
-                app:layout_constraintTop_toTopOf="@id/tvAvgThisWeek"
-                app:layout_constraintStart_toEndOf="@id/tvAvgThisWeek"
-                app:layout_constraintEnd_toEndOf="parent" />
+            // Distribution Map for Pie Chart
+            // Note: Update "getEmotion()" to whatever your actual getter is called in MoodLog!
+            String emotion = log.getEmotion() != null ? log.getEmotion() : "Unknown";
+            emotionDistribution.put(emotion, emotionDistribution.getOrDefault(emotion, 0) + 1);
 
-            <!-- Consistency Score Progress Bar -->
-            <TextView
-                android:id="@+id/tvScoreLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Consistency Score"
-                android:textColor="#666666"
-                app:layout_constraintTop_toBottomOf="@id/tvAvgThisWeek"
-                app:layout_constraintStart_toStartOf="parent" />
+            // Basic Streak Calculation
+            if (previousLogDate == null) {
+                currentStreak = 1;
+            } else {
+                long diffInMillies = Math.abs(previousLogDate.getTime() - logDate.getTime());
+                long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+                if (diffInDays <= 1) {
+                    currentStreak++;
+                }
+            }
+            previousLogDate = logDate;
+        }
 
-            <TextView
-                android:id="@+id/tvScorePercent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="85%"
-                android:textColor="#4CAF50"
-                android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="@id/tvScoreLabel"
-                app:layout_constraintEnd_toEndOf="parent" />
+        binding.tvThisWeek.setText(Math.min(logsThisWeek, 7) + "/7");
+        binding.tvDayStreak.setText(currentStreak + "d");
 
-            <ProgressBar
-                android:id="@+id/pbConsistency"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:max="100"
-                android:progressTint="#4CAF50"
-                app:layout_constraintTop_toBottomOf="@id/tvScoreLabel" />
+        // --- 3. DYNAMIC DESCRIPTION ---
+        generateDynamicDescription(emotionDistribution, logsThisWeek);
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        // --- 4. POPULATE PIE CHART ---
+        setupPieChart(emotionDistribution);
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+        // --- 5. CONSISTENCY METRICS ---
+        binding.tvAvgThisWeek.setText("AVG THIS WEEK\n" + (logsThisWeek > 0 ? logsThisWeek + " logs" : "N/A"));
+
+        // Basic mock logic for stability and consistency score
+        int consistencyScore = Math.min((logsThisWeek * 100) / 7, 100);
+        binding.pbConsistency.setProgress(consistencyScore);
+        binding.tvScorePercent.setText(consistencyScore + "%");
+
+        if (consistencyScore >= 80) {
+            binding.tvStability.setText("STABILITY\nHighly Stable");
+            binding.tvStability.setTextColor(Color.parseColor("#4CAF50")); // Green
+        } else {
+            binding.tvStability.setText("STABILITY\nVariable");
+            binding.tvStability.setTextColor(Color.parseColor("#FF9800")); // Orange
+        }
+    }
+
+    private void generateDynamicDescription(Map<String, Integer> emotionCounts, int logsThisWeek) {
+        if (logsThisWeek == 0) {
+            binding.tvDynamicTitle.setText("Quiet Week");
+            binding.tvDynamicDesc.setText("You haven't logged any emotions this week. Check in to keep your streak alive!");
+            return;
+        }
+
+        int negativeEmotions = emotionCounts.getOrDefault("Anxious", 0)
+                + emotionCounts.getOrDefault("Sad", 0)
+                + emotionCounts.getOrDefault("Angry", 0)
+                + emotionCounts.getOrDefault("Frustrated", 0)
+                + emotionCounts.getOrDefault("Overwhelmed", 0);
+
+        int total = 0;
+        for (int count : emotionCounts.values()) total += count;
+
+        if (total > 0 && (negativeEmotions * 100 / total) > 50) {
+            binding.tvDynamicTitle.setText("Significant Mood Swing");
+            binding.tvDynamicTitle.setTextColor(Color.parseColor("#FF9800")); // Orange
+            binding.tvDynamicDesc.setText("A large mood shift was detected in recent entries. High variability may signal an oncoming episode.");
+        } else {
+            binding.tvDynamicTitle.setText("Stable Mood");
+            binding.tvDynamicTitle.setTextColor(Color.parseColor("#4CAF50")); // Green
+            binding.tvDynamicDesc.setText("Your emotions have been mostly stable and positive. Keep up the great work!");
+        }
+    }
+
+    private void setupPieChart(Map<String, Integer> emotionDistribution) {
+        List<PieEntry> pieEntries = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : emotionDistribution.entrySet()) {
+            pieEntries.add(new PieEntry(entry.getValue(), entry.getKey()));
+        }
+
+        PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
+        // ColorTemplate.MATERIAL_COLORS works well for light themes
+        pieDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        pieDataSet.setValueTextColor(Color.WHITE);
+        pieDataSet.setValueTextSize(14f);
+
+        PieData pieData = new PieData(pieDataSet);
+
+        binding.chartMoodDistribution.setData(pieData);
+        binding.chartMoodDistribution.getDescription().setEnabled(false);
+        binding.chartMoodDistribution.setDrawHoleEnabled(true);
+        binding.chartMoodDistribution.setHoleColor(Color.WHITE);
+        binding.chartMoodDistribution.setTransparentCircleRadius(0f);
+        binding.chartMoodDistribution.getLegend().setTextColor(Color.BLACK);
+        binding.chartMoodDistribution.invalidate();
+    }
+}
