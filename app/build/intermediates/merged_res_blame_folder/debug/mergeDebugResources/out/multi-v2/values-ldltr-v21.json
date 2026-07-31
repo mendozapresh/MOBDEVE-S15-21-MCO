@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.steadyme.app-mergeDebugResources-50:/values-ldltr-v21/values-ldltr-v21.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Precious\\.gradle\\caches\\9.3.0\\transforms\\1521f17155a5a012feca945b7415d016\\workspace\\transformed\\appcompat-1.7.0\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "112",
+                        "endOffsets": "163"
+                    }
+                }
+            ]
+        }
+    ]
+}

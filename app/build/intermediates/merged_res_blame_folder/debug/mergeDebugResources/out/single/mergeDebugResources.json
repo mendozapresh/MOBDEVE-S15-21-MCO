@@ -1,0 +1,162 @@
+[
+    {
+        "merged": "com.steadyme.app-debug-52:/drawable_bg_circle_soft.xml.flat",
+        "source": "com.steadyme.app-main-54:/drawable/bg_circle_soft.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/layout_fragment_log_options.xml.flat",
+        "source": "com.steadyme.app-main-54:/layout/fragment_log_options.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/font_sf_pro_rounded_heavy.otf.flat",
+        "source": "com.steadyme.app-main-54:/font/sf_pro_rounded_heavy.otf"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/layout_fragment_manual_log.xml.flat",
+        "source": "com.steadyme.app-main-54:/layout/fragment_manual_log.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-xxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/layout_activity_splash.xml.flat",
+        "source": "com.steadyme.app-main-54:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/layout_activity_add_note.xml.flat",
+        "source": "com.steadyme.app-main-54:/layout/activity_add_note.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/layout_item_mood_log.xml.flat",
+        "source": "com.steadyme.app-main-54:/layout/item_mood_log.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/layout_activity_entry_saved.xml.flat",
+        "source": "com.steadyme.app-main-54:/layout/activity_entry_saved.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/layout_fragment_home.xml.flat",
+        "source": "com.steadyme.app-main-54:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/drawable_bg_rounded_card.xml.flat",
+        "source": "com.steadyme.app-main-54:/drawable/bg_rounded_card.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/layout_fragment_insights.xml.flat",
+        "source": "com.steadyme.app-main-54:/layout/fragment_insights.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/layout_activity_login.xml.flat",
+        "source": "com.steadyme.app-main-54:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/font_sfpro.xml.flat",
+        "source": "com.steadyme.app-main-54:/font/sfpro.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/drawable_emotions.png.flat",
+        "source": "com.steadyme.app-main-54:/drawable/emotions.png"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/layout_fragment_history.xml.flat",
+        "source": "com.steadyme.app-main-54:/layout/fragment_history.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/font_sf_pro_rounded_semibold.otf.flat",
+        "source": "com.steadyme.app-main-54:/font/sf_pro_rounded_semibold.otf"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-mdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/layout_activity_signup.xml.flat",
+        "source": "com.steadyme.app-main-54:/layout/activity_signup.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/layout_activity_camera_log.xml.flat",
+        "source": "com.steadyme.app-main-54:/layout/activity_camera_log.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/font_sf_pro_rounded_regular.otf.flat",
+        "source": "com.steadyme.app-main-54:/font/sf_pro_rounded_regular.otf"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/menu_bottom_nav.xml.flat",
+        "source": "com.steadyme.app-main-54:/menu/bottom_nav.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/layout_activity_main.xml.flat",
+        "source": "com.steadyme.app-main-54:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-hdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/layout_fragment_profile.xml.flat",
+        "source": "com.steadyme.app-main-54:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-xhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.steadyme.app-main-54:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.steadyme.app-debug-52:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.steadyme.app-main-54:/mipmap-hdpi/ic_launcher_round.webp"
+    }
+]

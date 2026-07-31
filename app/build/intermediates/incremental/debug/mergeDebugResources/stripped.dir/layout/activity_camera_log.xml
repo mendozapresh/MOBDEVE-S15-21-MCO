@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewCamera"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCloseCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCameraStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="#66000000"
+        android:padding="8dp"
+        android:text="Starting camera…"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnCloseCamera" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardCameraControls"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <LinearLayout
+                android:id="@+id/groupScan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Point camera at your face, then tap Scan."
+                    android:textColor="@color/text_secondary" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnScan"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="12dp"
+                    android:text="Scan" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSwitchManual"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Switch to Manual Log"
+                    android:textColor="@color/primary"
+                    app:backgroundTint="@color/surface_soft" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/groupResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvDetected"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Detected: Calm (50%)"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnUseEmotion"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="12dp"
+                    android:text="Use This Emotion" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRetry"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Retry"
+                    app:backgroundTint="@color/retry_orange" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center"
+                    android:text="or choose manually"
+                    android:textColor="@color/text_secondary" />
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:columnCount="4">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCamHappy"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:text="😊\nHappy" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCamElated"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:text="🤩\nElated" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCamCalm"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:text="😌\nCalm" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCamTired"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:text="😴\nTired" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCamSad"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:text="😢\nSad" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCamAnxious"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:text="😰\nAnxious" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCamFrustrated"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:text="😣\nFrustrated" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCamAngry"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:text="😠\nAngry" />
+                </GridLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

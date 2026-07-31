@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="primary">#8EB95A</color>
+    <color name="primary_dark">#5F8135</color>
+    <color name="retry_orange">#D98A5E</color>
+    <color name="surface_gray">#F7F7F8</color>
+    <color name="surface_soft">#F8FFEF</color>
+    <color name="text_secondary">#5F5F5F</color>
+    <color name="today_mood">#FFF8D9</color>
+    <string name="app_name">SteadyMe</string>
+    <string name="app_name_styled">Steady<b>Me</b></string>
+    <string name="firebase_setup">Add your Firebase google-services.json to the app folder before building.</string>
+    <string name="gcm_defaultSenderId" translatable="false">901253445586</string>
+    <string name="google_api_key" translatable="false">AIzaSyBNdWtjG9gjM6KRSP2--4k2t9Ocji2ykVg</string>
+    <string name="google_app_id" translatable="false">1:901253445586:android:75fd0e5d945a1679173a0b</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBNdWtjG9gjM6KRSP2--4k2t9Ocji2ykVg</string>
+    <string name="google_storage_bucket" translatable="false">mobdeve-mco3-f02ea.firebasestorage.app</string>
+    <string name="project_id" translatable="false">mobdeve-mco3-f02ea</string>
+    <style name="ShapeAppearance.SteadyMe.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">16dp</item>
+    </style>
+    <style name="TextAppearance.SteadyMe.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.SteadyMe.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.SteadyMe.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.SteadyMe.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.SteadyMe.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.SteadyMe.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Theme.SteadyMe" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="android:fontFamily">@font/sfpro</item>
+        <item name="fontFamily">@font/sfpro</item>
+
+        
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.SteadyMe.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.SteadyMe.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.SteadyMe.HeadlineSmall</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.SteadyMe.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.SteadyMe.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.SteadyMe.TitleSmall</item>
+
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.SteadyMe.MediumComponent</item>
+    </style>
+</resources>

@@ -1,0 +1,58 @@
+[
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/fragment_profile.xml",
+        "source": "com.steadyme.app-main-54:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/fragment_log_options.xml",
+        "source": "com.steadyme.app-main-54:/layout/fragment_log_options.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/activity_add_note.xml",
+        "source": "com.steadyme.app-main-54:/layout/activity_add_note.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/fragment_history.xml",
+        "source": "com.steadyme.app-main-54:/layout/fragment_history.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/activity_entry_saved.xml",
+        "source": "com.steadyme.app-main-54:/layout/activity_entry_saved.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/activity_splash.xml",
+        "source": "com.steadyme.app-main-54:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/fragment_insights.xml",
+        "source": "com.steadyme.app-main-54:/layout/fragment_insights.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/activity_main.xml",
+        "source": "com.steadyme.app-main-54:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/item_mood_log.xml",
+        "source": "com.steadyme.app-main-54:/layout/item_mood_log.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/activity_login.xml",
+        "source": "com.steadyme.app-main-54:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/activity_signup.xml",
+        "source": "com.steadyme.app-main-54:/layout/activity_signup.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/activity_camera_log.xml",
+        "source": "com.steadyme.app-main-54:/layout/activity_camera_log.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/fragment_home.xml",
+        "source": "com.steadyme.app-main-54:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/fragment_manual_log.xml",
+        "source": "com.steadyme.app-main-54:/layout/fragment_manual_log.xml"
+    }
+]
