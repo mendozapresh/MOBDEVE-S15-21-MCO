@@ -7,4 +7,66 @@
     <color name="today_mood">#FFF8D9</color>
     <color name="retry_orange">#D98A5E</color>
     <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray_100">#F5F5F5</color>
+    <color name="gray_300">#E0E0E0</color>
+    <color name="gray_600">#666666</color>
+    <color name="gray_800">#333333</color>
+
+    <!-- Status colors for insights -->
+    <color name="stable_green">#4CAF50</color>
+    <color name="warning_orange">#FF9800</color>
+
+    <!-- Mood palette (matches emotion selector artwork) -->
+    <color name="mood_happy">#6E5B00</color>
+    <color name="mood_elated">#7E2038</color>
+    <color name="mood_calm">#7A534D</color>
+    <color name="mood_tired">#205058</color>
+    <color name="mood_sad">#002553</color>
+    <color name="mood_anxious">#763900</color>
+    <color name="mood_frustrated">#574975</color>
+    <color name="mood_angry">#632614</color>
+
+    <!-- Pale tints for cards/badges -->
+    <color name="mood_happy_pale">#EFD453</color>
+    <color name="mood_elated_pale">#E36887</color>
+    <color name="mood_calm_pale">#F2CFC9</color>
+    <color name="mood_tired_pale">#81A4AA</color>
+    <color name="mood_sad_pale">#7298C7</color>
+    <color name="mood_anxious_pale">#EB994D</color>
+    <color name="mood_frustrated_pale">#D3CBE3</color>
+    <color name="mood_angry_pale">#DD785A</color>
+
+    <!-- Palest tints for full card backgrounds -->
+    <color name="mood_happy_palest">#FEF9E7</color>
+    <color name="mood_elated_palest">#FBEAEA</color>
+    <color name="mood_calm_palest">#FDF4F2</color>
+    <color name="mood_tired_palest">#F2F5F6</color>
+    <color name="mood_sad_palest">#F0F4F9</color>
+    <color name="mood_anxious_palest">#FEF6EE</color>
+    <color name="mood_frustrated_palest">#F7F6FA</color>
+    <color name="mood_angry_palest">#FBEAE6</color>
+
+
+    <!-- Insights card backgrounds -->
+    <color name="insight_blue_bg">#E8EEF7</color>
+    <color name="insight_pink_bg">#FBEAEA</color>
+    <color name="insight_orange_bg">#FBE6D2</color>
+    <color name="insight_orange_text">#D98A34</color>
+    <color name="insight_green_bg">#EAF3DC</color>
+    <color name="insight_gray_bg">#F5F5F5</color>
+
+    <!-- Bottom nav -->
+    <color name="nav_active">#1A1A1A</color>
+    <color name="nav_inactive">#8F8F8F</color>
+
+    <!-- Log options icon badges -->
+    <color name="camera_badge_bg">#F9E1E4</color>
+    <color name="camera_badge_fg">#D6467E</color>
+    <color name="manual_badge_bg">#FBF1D0</color>
+    <color name="manual_badge_fg">#8A7A1E</color>
+
+    <color name="bell_bg">#F0F0F0</color>
+    <color name="logout_bg">#FAD9CC</color>
+    <color name="logout_fg">#D9764F</color>
 </resources>

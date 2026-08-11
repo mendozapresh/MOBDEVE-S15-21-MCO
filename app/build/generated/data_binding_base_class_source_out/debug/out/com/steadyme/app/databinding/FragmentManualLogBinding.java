@@ -4,7 +4,9 @@ package com.steadyme.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,8 +14,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.steadyme.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -24,40 +24,61 @@ public final class FragmentManualLogBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final MaterialButton btnAngry;
+  public final LinearLayout btnAngry;
 
   @NonNull
-  public final MaterialButton btnAnxious;
+  public final LinearLayout btnAnxious;
 
   @NonNull
-  public final MaterialButton btnCalm;
+  public final ImageButton btnBackManual;
 
   @NonNull
-  public final MaterialButton btnElated;
+  public final LinearLayout btnCalm;
 
   @NonNull
-  public final MaterialButton btnHappy;
+  public final MaterialButton btnContinue;
 
   @NonNull
-  public final MaterialButton btnOverwhelmed;
+  public final LinearLayout btnElated;
 
   @NonNull
-  public final MaterialButton btnSad;
+  public final LinearLayout btnFrustrated;
 
   @NonNull
-  public final MaterialButton btnSaveMood;
+  public final LinearLayout btnHappy;
 
   @NonNull
-  public final MaterialButton btnTired;
+  public final LinearLayout btnSad;
 
   @NonNull
-  public final TextInputEditText etNotes;
+  public final LinearLayout btnTired;
 
   @NonNull
-  public final GridLayout gridEmotions;
+  public final ImageView ivAngry;
 
   @NonNull
-  public final TextInputLayout tilNotes;
+  public final ImageView ivAnxious;
+
+  @NonNull
+  public final ImageView ivCalm;
+
+  @NonNull
+  public final ImageView ivElated;
+
+  @NonNull
+  public final ImageView ivFrustrated;
+
+  @NonNull
+  public final ImageView ivHappy;
+
+  @NonNull
+  public final ImageView ivSad;
+
+  @NonNull
+  public final ImageView ivTired;
+
+  @NonNull
+  public final LinearLayout llMoodGrid;
 
   @NonNull
   public final TextView tvManualHint;
@@ -65,34 +86,38 @@ public final class FragmentManualLogBinding implements ViewBinding {
   @NonNull
   public final TextView tvManualTitle;
 
-  @NonNull
-  public final TextView tvSelectedEmotion;
-
   private FragmentManualLogBinding(@NonNull ConstraintLayout rootView,
-      @NonNull MaterialButton btnAngry, @NonNull MaterialButton btnAnxious,
-      @NonNull MaterialButton btnCalm, @NonNull MaterialButton btnElated,
-      @NonNull MaterialButton btnHappy, @NonNull MaterialButton btnOverwhelmed,
-      @NonNull MaterialButton btnSad, @NonNull MaterialButton btnSaveMood,
-      @NonNull MaterialButton btnTired, @NonNull TextInputEditText etNotes,
-      @NonNull GridLayout gridEmotions, @NonNull TextInputLayout tilNotes,
-      @NonNull TextView tvManualHint, @NonNull TextView tvManualTitle,
-      @NonNull TextView tvSelectedEmotion) {
+      @NonNull LinearLayout btnAngry, @NonNull LinearLayout btnAnxious,
+      @NonNull ImageButton btnBackManual, @NonNull LinearLayout btnCalm,
+      @NonNull MaterialButton btnContinue, @NonNull LinearLayout btnElated,
+      @NonNull LinearLayout btnFrustrated, @NonNull LinearLayout btnHappy,
+      @NonNull LinearLayout btnSad, @NonNull LinearLayout btnTired, @NonNull ImageView ivAngry,
+      @NonNull ImageView ivAnxious, @NonNull ImageView ivCalm, @NonNull ImageView ivElated,
+      @NonNull ImageView ivFrustrated, @NonNull ImageView ivHappy, @NonNull ImageView ivSad,
+      @NonNull ImageView ivTired, @NonNull LinearLayout llMoodGrid, @NonNull TextView tvManualHint,
+      @NonNull TextView tvManualTitle) {
     this.rootView = rootView;
     this.btnAngry = btnAngry;
     this.btnAnxious = btnAnxious;
+    this.btnBackManual = btnBackManual;
     this.btnCalm = btnCalm;
+    this.btnContinue = btnContinue;
     this.btnElated = btnElated;
+    this.btnFrustrated = btnFrustrated;
     this.btnHappy = btnHappy;
-    this.btnOverwhelmed = btnOverwhelmed;
     this.btnSad = btnSad;
-    this.btnSaveMood = btnSaveMood;
     this.btnTired = btnTired;
-    this.etNotes = etNotes;
-    this.gridEmotions = gridEmotions;
-    this.tilNotes = tilNotes;
+    this.ivAngry = ivAngry;
+    this.ivAnxious = ivAnxious;
+    this.ivCalm = ivCalm;
+    this.ivElated = ivElated;
+    this.ivFrustrated = ivFrustrated;
+    this.ivHappy = ivHappy;
+    this.ivSad = ivSad;
+    this.ivTired = ivTired;
+    this.llMoodGrid = llMoodGrid;
     this.tvManualHint = tvManualHint;
     this.tvManualTitle = tvManualTitle;
-    this.tvSelectedEmotion = tvSelectedEmotion;
   }
 
   @Override
@@ -123,74 +148,116 @@ public final class FragmentManualLogBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.btnAngry;
-      MaterialButton btnAngry = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout btnAngry = ViewBindings.findChildViewById(rootView, id);
       if (btnAngry == null) {
         break missingId;
       }
 
       id = R.id.btnAnxious;
-      MaterialButton btnAnxious = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout btnAnxious = ViewBindings.findChildViewById(rootView, id);
       if (btnAnxious == null) {
         break missingId;
       }
 
+      id = R.id.btnBackManual;
+      ImageButton btnBackManual = ViewBindings.findChildViewById(rootView, id);
+      if (btnBackManual == null) {
+        break missingId;
+      }
+
       id = R.id.btnCalm;
-      MaterialButton btnCalm = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout btnCalm = ViewBindings.findChildViewById(rootView, id);
       if (btnCalm == null) {
         break missingId;
       }
 
+      id = R.id.btnContinue;
+      MaterialButton btnContinue = ViewBindings.findChildViewById(rootView, id);
+      if (btnContinue == null) {
+        break missingId;
+      }
+
       id = R.id.btnElated;
-      MaterialButton btnElated = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout btnElated = ViewBindings.findChildViewById(rootView, id);
       if (btnElated == null) {
         break missingId;
       }
 
+      id = R.id.btnFrustrated;
+      LinearLayout btnFrustrated = ViewBindings.findChildViewById(rootView, id);
+      if (btnFrustrated == null) {
+        break missingId;
+      }
+
       id = R.id.btnHappy;
-      MaterialButton btnHappy = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout btnHappy = ViewBindings.findChildViewById(rootView, id);
       if (btnHappy == null) {
         break missingId;
       }
 
-      id = R.id.btnOverwhelmed;
-      MaterialButton btnOverwhelmed = ViewBindings.findChildViewById(rootView, id);
-      if (btnOverwhelmed == null) {
-        break missingId;
-      }
-
       id = R.id.btnSad;
-      MaterialButton btnSad = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout btnSad = ViewBindings.findChildViewById(rootView, id);
       if (btnSad == null) {
         break missingId;
       }
 
-      id = R.id.btnSaveMood;
-      MaterialButton btnSaveMood = ViewBindings.findChildViewById(rootView, id);
-      if (btnSaveMood == null) {
-        break missingId;
-      }
-
       id = R.id.btnTired;
-      MaterialButton btnTired = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout btnTired = ViewBindings.findChildViewById(rootView, id);
       if (btnTired == null) {
         break missingId;
       }
 
-      id = R.id.etNotes;
-      TextInputEditText etNotes = ViewBindings.findChildViewById(rootView, id);
-      if (etNotes == null) {
+      id = R.id.ivAngry;
+      ImageView ivAngry = ViewBindings.findChildViewById(rootView, id);
+      if (ivAngry == null) {
         break missingId;
       }
 
-      id = R.id.gridEmotions;
-      GridLayout gridEmotions = ViewBindings.findChildViewById(rootView, id);
-      if (gridEmotions == null) {
+      id = R.id.ivAnxious;
+      ImageView ivAnxious = ViewBindings.findChildViewById(rootView, id);
+      if (ivAnxious == null) {
         break missingId;
       }
 
-      id = R.id.tilNotes;
-      TextInputLayout tilNotes = ViewBindings.findChildViewById(rootView, id);
-      if (tilNotes == null) {
+      id = R.id.ivCalm;
+      ImageView ivCalm = ViewBindings.findChildViewById(rootView, id);
+      if (ivCalm == null) {
+        break missingId;
+      }
+
+      id = R.id.ivElated;
+      ImageView ivElated = ViewBindings.findChildViewById(rootView, id);
+      if (ivElated == null) {
+        break missingId;
+      }
+
+      id = R.id.ivFrustrated;
+      ImageView ivFrustrated = ViewBindings.findChildViewById(rootView, id);
+      if (ivFrustrated == null) {
+        break missingId;
+      }
+
+      id = R.id.ivHappy;
+      ImageView ivHappy = ViewBindings.findChildViewById(rootView, id);
+      if (ivHappy == null) {
+        break missingId;
+      }
+
+      id = R.id.ivSad;
+      ImageView ivSad = ViewBindings.findChildViewById(rootView, id);
+      if (ivSad == null) {
+        break missingId;
+      }
+
+      id = R.id.ivTired;
+      ImageView ivTired = ViewBindings.findChildViewById(rootView, id);
+      if (ivTired == null) {
+        break missingId;
+      }
+
+      id = R.id.llMoodGrid;
+      LinearLayout llMoodGrid = ViewBindings.findChildViewById(rootView, id);
+      if (llMoodGrid == null) {
         break missingId;
       }
 
@@ -206,15 +273,10 @@ public final class FragmentManualLogBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.tvSelectedEmotion;
-      TextView tvSelectedEmotion = ViewBindings.findChildViewById(rootView, id);
-      if (tvSelectedEmotion == null) {
-        break missingId;
-      }
-
       return new FragmentManualLogBinding((ConstraintLayout) rootView, btnAngry, btnAnxious,
-          btnCalm, btnElated, btnHappy, btnOverwhelmed, btnSad, btnSaveMood, btnTired, etNotes,
-          gridEmotions, tilNotes, tvManualHint, tvManualTitle, tvSelectedEmotion);
+          btnBackManual, btnCalm, btnContinue, btnElated, btnFrustrated, btnHappy, btnSad, btnTired,
+          ivAngry, ivAnxious, ivCalm, ivElated, ivFrustrated, ivHappy, ivSad, ivTired, llMoodGrid,
+          tvManualHint, tvManualTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

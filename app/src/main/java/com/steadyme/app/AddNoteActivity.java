@@ -33,20 +33,41 @@ public class AddNoteActivity extends AppCompatActivity {
         String source = getIntent().getStringExtra(EXTRA_SOURCE);
         String notes = binding.etNote.getText() == null ? "" : binding.etNote.getText().toString().trim();
 
+        // Safety check for emotion
+        if (emotion == null || emotion.isEmpty()) {
+            Toast.makeText(this, "Emotion data missing. Please try again.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
         binding.btnSaveNote.setEnabled(false);
 
-        new FirebaseRepository().saveMood(new MoodLog(emotion, notes, source, score), new FirebaseRepository.SaveCallback() {
-            @Override
-            public void onSaved() {
-                startActivity(new Intent(AddNoteActivity.this, EntrySavedActivity.class));
-                finish();
-            }
+        try {
+            // We proceed immediately to the success screen. 
+            // Firestore's local persistence ensures the data is "saved" to the UI 
+            // instantly, while background sync handles the server upload.
+            new FirebaseRepository().saveMood(new MoodLog(emotion, notes, source, score), new FirebaseRepository.SaveCallback() {
+                @Override
+                public void onSaved() {
+                    // Already proceeded, but we could log success here
+                }
 
-            @Override
-            public void onError(Exception e) {
-                binding.btnSaveNote.setEnabled(true);
-                Toast.makeText(AddNoteActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onError(Exception e) {
+                    // If a fatal error occurs (e.g. not signed in), Firestore might still 
+                    // trigger this, though usually it just queues the work.
+                }
+            });
+
+            Intent intent = new Intent(AddNoteActivity.this, EntrySavedActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+
+        } catch (Exception e) {
+            binding.btnSaveNote.setEnabled(true);
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
+
 }

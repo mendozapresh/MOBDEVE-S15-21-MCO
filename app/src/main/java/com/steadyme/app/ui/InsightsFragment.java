@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import androidx.core.content.ContextCompat;
+
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -18,12 +20,13 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.ListenerRegistration;
+import com.steadyme.app.R;
 import com.steadyme.app.data.FirebaseRepository;
 import com.steadyme.app.databinding.FragmentInsightsBinding;
 import com.steadyme.app.model.MoodLog;
+
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -92,9 +95,10 @@ public class InsightsFragment extends Fragment {
             labels.add(log.getCreatedAt() == null ? "Now" : new SimpleDateFormat("MMM d", Locale.getDefault()).format(log.getCreatedAt().toDate()));
         }
 
+        int brandGreen = ContextCompat.getColor(requireContext(), R.color.primary);
         LineDataSet data = new LineDataSet(entries, "Mood score");
-        data.setColor(Color.rgb(142, 185, 90));
-        data.setCircleColor(Color.rgb(142, 185, 90));
+        data.setColor(brandGreen);
+        data.setCircleColor(brandGreen);
         data.setLineWidth(3f);
         binding.chartMood.setData(new LineData(data));
         binding.chartMood.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
@@ -106,6 +110,7 @@ public class InsightsFragment extends Fragment {
         binding.chartMood.getXAxis().setTextColor(Color.BLACK);
         binding.chartMood.getAxisLeft().setTextColor(Color.BLACK);
         binding.chartMood.getLegend().setTextColor(Color.BLACK);
+
 
         binding.chartMood.invalidate();
         binding.tvInsightSummary.setText("Based on your last " + shown + " check-ins.");
@@ -190,11 +195,12 @@ public class InsightsFragment extends Fragment {
 
         if (consistencyScore >= 70) {
             binding.tvStability.setText("STABILITY\nHighly Stable");
-            binding.tvStability.setTextColor(Color.parseColor("#4CAF50")); // Green
+            binding.tvStability.setTextColor(ContextCompat.getColor(requireContext(), R.color.stable_green));
         } else {
             binding.tvStability.setText("STABILITY\nVariable");
-            binding.tvStability.setTextColor(Color.parseColor("#FF9800")); // Orange
+            binding.tvStability.setTextColor(ContextCompat.getColor(requireContext(), R.color.warning_orange));
         }
+
     }
 
     private void generateDynamicDescription(Map<String, Integer> emotionCounts, int uniqueDaysThisWeek) {
@@ -218,24 +224,26 @@ public class InsightsFragment extends Fragment {
 
         if (total > 0 && (negativeEmotions * 100 / total) > 50) {
             binding.tvDynamicTitle.setText("Significant Mood Swing");
-            binding.tvDynamicTitle.setTextColor(Color.parseColor("#FF9800")); // Orange
+            binding.tvDynamicTitle.setTextColor(ContextCompat.getColor(requireContext(), R.color.warning_orange));
             binding.tvDynamicDesc.setText("A large mood shift was detected in recent entries. High variability may signal an oncoming episode.");
         } else {
             binding.tvDynamicTitle.setText("Stable Mood");
-            binding.tvDynamicTitle.setTextColor(Color.parseColor("#4CAF50")); // Green
+            binding.tvDynamicTitle.setTextColor(ContextCompat.getColor(requireContext(), R.color.stable_green));
             binding.tvDynamicDesc.setText("Your emotions have been mostly stable and positive. Keep up the great work!");
         }
+
     }
 
     private void setupPieChart(Map<String, Integer> emotionDistribution) {
         List<PieEntry> pieEntries = new ArrayList<>();
+        List<Integer> colors = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : emotionDistribution.entrySet()) {
             pieEntries.add(new PieEntry(entry.getValue(), entry.getKey()));
+            colors.add(MoodPalette.color(requireContext(), entry.getKey()));
         }
 
         PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
-        // ColorTemplate generates vibrant colors suitable for light themes
-        pieDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        pieDataSet.setColors(colors);
         pieDataSet.setValueTextColor(Color.WHITE);
         pieDataSet.setValueTextSize(14f);
 
@@ -249,4 +257,5 @@ public class InsightsFragment extends Fragment {
         binding.chartMoodDistribution.getLegend().setTextColor(Color.BLACK); // Light theme legend
         binding.chartMoodDistribution.invalidate();
     }
+
 }

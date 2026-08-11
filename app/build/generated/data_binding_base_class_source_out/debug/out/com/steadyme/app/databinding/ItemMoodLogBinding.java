@@ -4,6 +4,7 @@ package com.steadyme.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,20 +21,25 @@ public final class ItemMoodLogBinding implements ViewBinding {
   private final MaterialCardView rootView;
 
   @NonNull
+  public final MaterialCardView cardMoodLog;
+
+  @NonNull
   public final TextView tvDate;
 
   @NonNull
   public final TextView tvEmotion;
 
   @NonNull
-  public final TextView tvMoodEmoji;
+  public final ImageView tvMoodEmoji;
 
   @NonNull
   public final TextView tvNotes;
 
-  private ItemMoodLogBinding(@NonNull MaterialCardView rootView, @NonNull TextView tvDate,
-      @NonNull TextView tvEmotion, @NonNull TextView tvMoodEmoji, @NonNull TextView tvNotes) {
+  private ItemMoodLogBinding(@NonNull MaterialCardView rootView,
+      @NonNull MaterialCardView cardMoodLog, @NonNull TextView tvDate, @NonNull TextView tvEmotion,
+      @NonNull ImageView tvMoodEmoji, @NonNull TextView tvNotes) {
     this.rootView = rootView;
+    this.cardMoodLog = cardMoodLog;
     this.tvDate = tvDate;
     this.tvEmotion = tvEmotion;
     this.tvMoodEmoji = tvMoodEmoji;
@@ -67,6 +73,8 @@ public final class ItemMoodLogBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      MaterialCardView cardMoodLog = (MaterialCardView) rootView;
+
       id = R.id.tvDate;
       TextView tvDate = ViewBindings.findChildViewById(rootView, id);
       if (tvDate == null) {
@@ -80,7 +88,7 @@ public final class ItemMoodLogBinding implements ViewBinding {
       }
 
       id = R.id.tvMoodEmoji;
-      TextView tvMoodEmoji = ViewBindings.findChildViewById(rootView, id);
+      ImageView tvMoodEmoji = ViewBindings.findChildViewById(rootView, id);
       if (tvMoodEmoji == null) {
         break missingId;
       }
@@ -91,8 +99,8 @@ public final class ItemMoodLogBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemMoodLogBinding((MaterialCardView) rootView, tvDate, tvEmotion, tvMoodEmoji,
-          tvNotes);
+      return new ItemMoodLogBinding((MaterialCardView) rootView, cardMoodLog, tvDate, tvEmotion,
+          tvMoodEmoji, tvNotes);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

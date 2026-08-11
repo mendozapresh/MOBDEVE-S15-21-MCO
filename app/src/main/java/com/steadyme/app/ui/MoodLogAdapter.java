@@ -48,33 +48,15 @@ public class MoodLogAdapter extends RecyclerView.Adapter<MoodLogAdapter.Holder> 
 
         void bind(MoodLog moodLog) {
             binding.tvEmotion.setText(moodLog.getEmotion());
-            binding.tvMoodEmoji.setText(emoji(moodLog.getEmotion()));
+            binding.tvEmotion.setTextColor(MoodPalette.color(binding.getRoot().getContext(), moodLog.getEmotion()));
+            binding.tvMoodEmoji.setImageResource(MoodPalette.iconRes(moodLog.getEmotion()));
+            binding.tvMoodEmoji.getBackground().setTint(MoodPalette.paleColor(binding.getRoot().getContext(), moodLog.getEmotion()));
+            binding.cardMoodLog.setCardBackgroundColor(MoodPalette.palestColor(binding.getRoot().getContext(), moodLog.getEmotion()));
             binding.tvNotes.setText(moodLog.getNotes() == null || moodLog.getNotes().isEmpty() ? "No notes added" : moodLog.getNotes());
+
             binding.tvDate.setText(moodLog.getCreatedAt() == null ? "Saving…" : DateFormat.getDateInstance(DateFormat.MEDIUM).format(moodLog.getCreatedAt().toDate()));
         }
 
-        private String emoji(String emotion) {
-            if (emotion == null) {
-                return "🙂";
-            }
-            switch (emotion) {
-                case "Happy":
-                    return "😊";
-                case "Calm":
-                    return "😌";
-                case "Elated":
-                    return "🤩";
-                case "Anxious":
-                    return "😰";
-                case "Sad":
-                    return "😢";
-                case "Tired":
-                    return "😴";
-                case "Angry":
-                    return "😠";
-                default:
-                    return "😣";
-            }
-        }
+
     }
 }

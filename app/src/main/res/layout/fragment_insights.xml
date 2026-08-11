@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/white"
     android:fillViewport="true">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,8 +18,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Insights"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:textSize="28sp"
+
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,8 +31,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Your emotional patterns at a glance"
-            android:textColor="#666666"
+            android:textColor="@color/gray_600"
             app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvInsightsTitle" />
 
@@ -50,8 +53,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:background="#F5F5F5"
+                android:background="@color/gray_100"
                 android:gravity="center"
+
                 android:orientation="vertical"
                 android:padding="12dp">
 
@@ -59,8 +63,9 @@
                     android:id="@+id/tvTotalLogs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#000000"
+                    android:textColor="@color/black"
                     android:textSize="22sp"
+
                     android:textStyle="bold"
                     tools:text="14" />
 
@@ -69,8 +74,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="TOTAL LOGS"
-                    android:textColor="#666666"
+                    android:textColor="@color/gray_600"
                     android:textSize="10sp" />
+
             </LinearLayout>
 
             <!-- Day Streak Box -->
@@ -79,8 +85,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:background="#F5F5F5"
+                android:background="@color/gray_100"
                 android:gravity="center"
+
                 android:orientation="vertical"
                 android:padding="12dp">
 
@@ -88,8 +95,9 @@
                     android:id="@+id/tvDayStreak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#000000"
+                    android:textColor="@color/black"
                     android:textSize="22sp"
+
                     android:textStyle="bold"
                     tools:text="14d" />
 
@@ -98,8 +106,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="DAY STREAK"
-                    android:textColor="#666666"
+                    android:textColor="@color/gray_600"
                     android:textSize="10sp" />
+
             </LinearLayout>
 
             <!-- This Week Box -->
@@ -107,8 +116,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#F5F5F5"
+                android:background="@color/gray_100"
                 android:gravity="center"
+
                 android:orientation="vertical"
                 android:padding="12dp">
 
@@ -116,8 +126,9 @@
                     android:id="@+id/tvThisWeek"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#000000"
+                    android:textColor="@color/black"
                     android:textSize="22sp"
+
                     android:textStyle="bold"
                     tools:text="7/7" />
 
@@ -126,8 +137,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="THIS WEEK"
-                    android:textColor="#666666"
+                    android:textColor="@color/gray_600"
                     android:textSize="10sp" />
+
             </LinearLayout>
         </LinearLayout>
 
@@ -137,16 +149,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="#F5F5F5"
+            android:background="@color/gray_100"
             android:padding="16dp"
+
             app:layout_constraintTop_toBottomOf="@id/llTopCounters">
 
             <TextView
                 android:id="@+id/tvDynamicTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="#FF9800"
+                android:textColor="@color/warning_orange"
                 android:textStyle="bold"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -157,8 +171,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textColor="#333333"
+                android:textColor="@color/gray_800"
                 app:layout_constraintEnd_toEndOf="parent"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvDynamicTitle"
                 tools:text="A large mood shift was detected in recent entries." />
@@ -170,17 +185,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="#F5F5F5"
+            android:background="@color/gray_100"
             android:orientation="vertical"
             android:padding="16dp"
+
             app:layout_constraintTop_toBottomOf="@id/clDynamicDesc">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mood Trend"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textSize="18sp"
+
                 android:textStyle="bold" />
 
             <com.github.mikephil.charting.charts.LineChart
@@ -196,17 +213,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="#F5F5F5"
+            android:background="@color/gray_100"
             android:orientation="vertical"
             android:padding="16dp"
+
             app:layout_constraintTop_toBottomOf="@id/llTrendContainer">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mood Distribution"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textSize="18sp"
+
                 android:textStyle="bold" />
 
             <com.github.mikephil.charting.charts.PieChart
@@ -222,8 +241,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="#F5F5F5"
+            android:background="@color/gray_100"
             android:padding="16dp"
+
             app:layout_constraintTop_toBottomOf="@id/llDistributionContainer">
 
             <TextView
@@ -231,8 +251,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mood Consistency"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textSize="18sp"
+
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -243,8 +264,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:textAlignment="center"
-                android:textColor="#666666"
+                android:textColor="@color/gray_600"
                 app:layout_constraintEnd_toStartOf="@id/tvStability"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvConsistencyHeader"
                 tools:text="AVG THIS WEEK\nN/A" />
@@ -254,8 +276,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:textColor="#4CAF50"
+                android:textColor="@color/stable_green"
                 android:textStyle="bold"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvAvgThisWeek"
                 app:layout_constraintTop_toTopOf="@id/tvAvgThisWeek"
@@ -268,16 +291,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="Consistency Score"
-                android:textColor="#666666"
+                android:textColor="@color/gray_600"
                 app:layout_constraintStart_toStartOf="parent"
+
                 app:layout_constraintTop_toBottomOf="@id/tvAvgThisWeek" />
 
             <TextView
                 android:id="@+id/tvScorePercent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#4CAF50"
+                android:textColor="@color/stable_green"
                 android:textStyle="bold"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tvScoreLabel"
                 tools:text="85%" />
@@ -289,8 +314,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:max="100"
-                android:progressTint="#4CAF50"
+                android:progressTint="@color/stable_green"
                 app:layout_constraintTop_toBottomOf="@id/tvScoreLabel" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

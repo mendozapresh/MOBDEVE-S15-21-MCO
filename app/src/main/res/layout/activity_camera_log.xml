@@ -120,52 +120,274 @@
                     android:text="or choose manually"
                     android:textColor="@color/text_secondary" />
 
-                <GridLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:columnCount="4">
+                    android:layout_marginTop="6dp"
+                    android:orientation="vertical">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCamHappy"
-                        style="@style/Widget.Material3.Button.TextButton"
-                        android:text="😊\nHappy" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCamElated"
-                        style="@style/Widget.Material3.Button.TextButton"
-                        android:text="🤩\nElated" />
+                        <LinearLayout
+                            android:id="@+id/btnCamHappy"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingVertical="6dp">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCamCalm"
-                        style="@style/Widget.Material3.Button.TextButton"
-                        android:text="😌\nCalm" />
+                            <ImageView
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                android:background="@drawable/bg_circle_filled"
+                                android:backgroundTint="@color/mood_happy_pale"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/img_happy" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCamTired"
-                        style="@style/Widget.Material3.Button.TextButton"
-                        android:text="😴\nTired" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCamSad"
-                        style="@style/Widget.Material3.Button.TextButton"
-                        android:text="😢\nSad" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Happy"
+                                android:textColor="@color/mood_happy"
+                                android:textSize="11sp" />
+                        </LinearLayout>
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCamAnxious"
-                        style="@style/Widget.Material3.Button.TextButton"
-                        android:text="😰\nAnxious" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCamFrustrated"
-                        style="@style/Widget.Material3.Button.TextButton"
-                        android:text="😣\nFrustrated" />
+                        <LinearLayout
+                            android:id="@+id/btnCamElated"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingVertical="6dp">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCamAngry"
-                        style="@style/Widget.Material3.Button.TextButton"
-                        android:text="😠\nAngry" />
-                </GridLayout>
+                            <ImageView
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                android:background="@drawable/bg_circle_filled"
+                                android:backgroundTint="@color/mood_elated_pale"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/img_elated" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Elated"
+                                android:textColor="@color/mood_elated"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/btnCamCalm"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingVertical="6dp">
+
+                            <ImageView
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                android:background="@drawable/bg_circle_filled"
+                                android:backgroundTint="@color/mood_calm_pale"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/img_calm" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Calm"
+                                android:textColor="@color/mood_calm"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/btnCamTired"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingVertical="6dp">
+
+                            <ImageView
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                android:background="@drawable/bg_circle_filled"
+                                android:backgroundTint="@color/mood_tired_pale"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/img_tired" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Tired"
+                                android:textColor="@color/mood_tired"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
+
+                        <LinearLayout
+                            android:id="@+id/btnCamSad"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingVertical="6dp">
+
+                            <ImageView
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                android:background="@drawable/bg_circle_filled"
+                                android:backgroundTint="@color/mood_sad_pale"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/img_sad" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Sad"
+                                android:textColor="@color/mood_sad"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/btnCamAnxious"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingVertical="6dp">
+
+                            <ImageView
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                android:background="@drawable/bg_circle_filled"
+                                android:backgroundTint="@color/mood_anxious_pale"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/img_anxious" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Anxious"
+                                android:textColor="@color/mood_anxious"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/btnCamFrustrated"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingVertical="6dp">
+
+                            <ImageView
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                android:background="@drawable/bg_circle_filled"
+                                android:backgroundTint="@color/mood_frustrated_pale"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/img_overwhelmed" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Frustrated"
+                                android:textColor="@color/mood_frustrated"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/btnCamAngry"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingVertical="6dp">
+
+                            <ImageView
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                android:background="@drawable/bg_circle_filled"
+                                android:backgroundTint="@color/mood_angry_pale"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/img_angry" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Angry"
+                                android:textColor="@color/mood_angry"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

@@ -30,37 +30,44 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardCamera"
         android:layout_width="0dp"
-        android:layout_height="160dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        app:cardBackgroundColor="@color/surface_soft"
+        app:cardBackgroundColor="@color/camera_badge_bg"
         app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvLogSubtitle">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="📷"
-                android:textSize="30sp" />
+            <ImageView
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:background="@drawable/bg_circle_filled"
+                android:backgroundTint="#FCEEF0"
+                android:contentDescription="Camera"
+                android:padding="11dp"
+                android:src="@drawable/ic_camera_badge" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Camera"
+                android:textColor="@color/camera_badge_fg"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Camera-assisted check-in with face detection."
+                android:layout_marginTop="4dp"
+                android:text="Facial expression detects your emotion"
                 android:textColor="@color/text_secondary" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -68,37 +75,44 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardManual"
         android:layout_width="0dp"
-        android:layout_height="160dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        app:cardBackgroundColor="@color/surface_gray"
+        app:cardBackgroundColor="@color/manual_badge_bg"
         app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardCamera">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="✍️"
-                android:textSize="30sp" />
+            <ImageView
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:background="@drawable/bg_circle_filled"
+                android:backgroundTint="#F1E4A8"
+                android:contentDescription="Manual"
+                android:padding="11dp"
+                android:src="@drawable/ic_manual_badge" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Manual"
+                android:textColor="@color/manual_badge_fg"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Choose an emotion and add a private note."
+                android:layout_marginTop="4dp"
+                android:text="Choose from a visual emoji grid to log your current emotion"
                 android:textColor="@color/text_secondary" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

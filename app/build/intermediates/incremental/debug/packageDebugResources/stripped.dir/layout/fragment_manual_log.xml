@@ -5,116 +5,335 @@
     android:layout_height="match_parent"
     android:padding="20dp">
 
+    <ImageButton
+        android:id="@+id/btnBackManual"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:background="@drawable/bg_circle_filled"
+        android:backgroundTint="@color/surface_gray"
+        android:padding="10dp"
+        android:src="@android:drawable/ic_menu_revert"
+        android:contentDescription="Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tvManualTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
         android:text="Manual Log"
-        android:textSize="28sp"
+        android:textSize="26sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/btnBackManual"
+        app:layout_constraintStart_toEndOf="@id/btnBackManual"
+        app:layout_constraintTop_toTopOf="@id/btnBackManual" />
 
     <TextView
         android:id="@+id/tvManualHint"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Tap the emotion that best describes your current state."
+        android:layout_marginTop="16dp"
+        android:text="Tap the emotion that best describes your feelings."
         android:textColor="@color/text_secondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvManualTitle" />
+        app:layout_constraintTop_toBottomOf="@id/btnBackManual" />
 
-    <GridLayout
-        android:id="@+id/gridEmotions"
+    <LinearLayout
+        android:id="@+id/llMoodGrid"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:columnCount="4"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvManualHint">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnHappy"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:text="😊\nHappy" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnElated"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:text="🤩\nElated" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCalm"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:text="😌\nCalm" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnTired"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:text="😴\nTired" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSad"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:text="😢\nSad" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAnxious"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:text="😰\nAnxious" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnOverwhelmed"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:text="😣\nOverwhelmed" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAngry"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:text="😠\nAngry" />
-
-    </GridLayout>
-
-    <TextView
-        android:id="@+id/tvSelectedEmotion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/primary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gridEmotions" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilNotes"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:hint="Notes (optional)"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSelectedEmotion">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etNotes"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:gravity="top"
-            android:inputType="textMultiLine" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
+                android:id="@+id/btnHappy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/ivHappy"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_circle_filled"
+                    android:backgroundTint="@color/mood_happy_pale"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_happy" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Happy"
+                    android:textColor="@color/mood_happy"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/btnElated"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/ivElated"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_circle_filled"
+                    android:backgroundTint="@color/mood_elated_pale"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_elated" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Elated"
+                    android:textColor="@color/mood_elated"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/btnCalm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/ivCalm"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_circle_filled"
+                    android:backgroundTint="@color/mood_calm_pale"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_calm" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Calm"
+                    android:textColor="@color/mood_calm"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/btnTired"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/ivTired"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_circle_filled"
+                    android:backgroundTint="@color/mood_tired_pale"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_tired" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Tired"
+                    android:textColor="@color/mood_tired"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:id="@+id/btnSad"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/ivSad"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_circle_filled"
+                    android:backgroundTint="@color/mood_sad_pale"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_sad" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Sad"
+                    android:textColor="@color/mood_sad"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/btnAnxious"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/ivAnxious"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_circle_filled"
+                    android:backgroundTint="@color/mood_anxious_pale"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_anxious" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Anxious"
+                    android:textColor="@color/mood_anxious"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/btnFrustrated"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/ivFrustrated"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_circle_filled"
+                    android:backgroundTint="@color/mood_frustrated_pale"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_overwhelmed" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Frustrated"
+                    android:textColor="@color/mood_frustrated"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/btnAngry"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/ivAngry"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_circle_filled"
+                    android:backgroundTint="@color/mood_angry_pale"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_angry" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Angry"
+                    android:textColor="@color/mood_angry"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSaveMood"
+        android:id="@+id/btnContinue"
         android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="18dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="28dp"
         android:enabled="false"
-        android:text="Save mood"
+        android:text="Continue"
+        android:textStyle="bold"
+        app:cornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tilNotes" />
+        app:layout_constraintTop_toBottomOf="@id/llMoodGrid" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

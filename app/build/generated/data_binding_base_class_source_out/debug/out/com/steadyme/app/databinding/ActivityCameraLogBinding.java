@@ -24,28 +24,28 @@ public final class ActivityCameraLogBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final MaterialButton btnCamAngry;
+  public final LinearLayout btnCamAngry;
 
   @NonNull
-  public final MaterialButton btnCamAnxious;
+  public final LinearLayout btnCamAnxious;
 
   @NonNull
-  public final MaterialButton btnCamCalm;
+  public final LinearLayout btnCamCalm;
 
   @NonNull
-  public final MaterialButton btnCamElated;
+  public final LinearLayout btnCamElated;
 
   @NonNull
-  public final MaterialButton btnCamFrustrated;
+  public final LinearLayout btnCamFrustrated;
 
   @NonNull
-  public final MaterialButton btnCamHappy;
+  public final LinearLayout btnCamHappy;
 
   @NonNull
-  public final MaterialButton btnCamSad;
+  public final LinearLayout btnCamSad;
 
   @NonNull
-  public final MaterialButton btnCamTired;
+  public final LinearLayout btnCamTired;
 
   @NonNull
   public final MaterialButton btnCloseCamera;
@@ -81,10 +81,10 @@ public final class ActivityCameraLogBinding implements ViewBinding {
   public final TextView tvDetected;
 
   private ActivityCameraLogBinding(@NonNull ConstraintLayout rootView,
-      @NonNull MaterialButton btnCamAngry, @NonNull MaterialButton btnCamAnxious,
-      @NonNull MaterialButton btnCamCalm, @NonNull MaterialButton btnCamElated,
-      @NonNull MaterialButton btnCamFrustrated, @NonNull MaterialButton btnCamHappy,
-      @NonNull MaterialButton btnCamSad, @NonNull MaterialButton btnCamTired,
+      @NonNull LinearLayout btnCamAngry, @NonNull LinearLayout btnCamAnxious,
+      @NonNull LinearLayout btnCamCalm, @NonNull LinearLayout btnCamElated,
+      @NonNull LinearLayout btnCamFrustrated, @NonNull LinearLayout btnCamHappy,
+      @NonNull LinearLayout btnCamSad, @NonNull LinearLayout btnCamTired,
       @NonNull MaterialButton btnCloseCamera, @NonNull MaterialButton btnRetry,
       @NonNull MaterialButton btnScan, @NonNull MaterialButton btnSwitchManual,
       @NonNull MaterialButton btnUseEmotion, @NonNull MaterialCardView cardCameraControls,
@@ -141,49 +141,49 @@ public final class ActivityCameraLogBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.btnCamAngry;
-      MaterialButton btnCamAngry = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout btnCamAngry = ViewBindings.findChildViewById(rootView, id);
       if (btnCamAngry == null) {
         break missingId;
       }
 
       id = R.id.btnCamAnxious;
-      MaterialButton btnCamAnxious = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout btnCamAnxious = ViewBindings.findChildViewById(rootView, id);
       if (btnCamAnxious == null) {
         break missingId;
       }
 
       id = R.id.btnCamCalm;
-      MaterialButton btnCamCalm = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout btnCamCalm = ViewBindings.findChildViewById(rootView, id);
       if (btnCamCalm == null) {
         break missingId;
       }
 
       id = R.id.btnCamElated;
-      MaterialButton btnCamElated = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout btnCamElated = ViewBindings.findChildViewById(rootView, id);
       if (btnCamElated == null) {
         break missingId;
       }
 
       id = R.id.btnCamFrustrated;
-      MaterialButton btnCamFrustrated = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout btnCamFrustrated = ViewBindings.findChildViewById(rootView, id);
       if (btnCamFrustrated == null) {
         break missingId;
       }
 
       id = R.id.btnCamHappy;
-      MaterialButton btnCamHappy = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout btnCamHappy = ViewBindings.findChildViewById(rootView, id);
       if (btnCamHappy == null) {
         break missingId;
       }
 
       id = R.id.btnCamSad;
-      MaterialButton btnCamSad = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout btnCamSad = ViewBindings.findChildViewById(rootView, id);
       if (btnCamSad == null) {
         break missingId;
       }
 
       id = R.id.btnCamTired;
-      MaterialButton btnCamTired = ViewBindings.findChildViewById(rootView, id);
+      LinearLayout btnCamTired = ViewBindings.findChildViewById(rootView, id);
       if (btnCamTired == null) {
         break missingId;
       }
