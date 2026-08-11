@@ -43,6 +43,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.steadyme.app.CameraLogActivity" />
+        <activity android:name="com.steadyme.app.MoodIntensityActivity" />
+        <activity android:name="com.steadyme.app.ReasonsActivity" />
         <activity android:name="com.steadyme.app.AddNoteActivity" />
         <activity android:name="com.steadyme.app.EntrySavedActivity" />
         <activity android:name="com.steadyme.app.MainActivity" />

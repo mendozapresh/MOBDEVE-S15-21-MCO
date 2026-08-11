@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -49,7 +51,10 @@ public class HomeFragment extends Fragment {
         String email = FirebaseAuth.getInstance().getCurrentUser() == null ? "there" : FirebaseAuth.getInstance().getCurrentUser().getEmail();
         binding.tvGreetingName.setText(email == null ? "there 👋" : email.split("@")[0] + " 👋");
         binding.ivLogout.setOnClickListener(x -> logout());
-        binding.ivBell.setOnClickListener(x -> Snackbar.make(binding.getRoot(), "No new notifications", Snackbar.LENGTH_SHORT).show());
+        binding.ivBell.setOnClickListener(x -> getParentFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, new NotificationsFragment())
+                .addToBackStack(null)
+                .commit());
         binding.tvSeeAll.setOnClickListener(x ->
                 ((BottomNavigationView) requireActivity().findViewById(R.id.bottomNav)).setSelectedItemId(R.id.nav_history));
         binding.tvHotline.setOnClickListener(x -> {
@@ -64,8 +69,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void onLoaded(List<MoodLog> logs) {
                 adapter.submit(logs);
-                binding.tvStreakValue.setText(String.valueOf(calculateStreak(logs)));
-                binding.progressStreak.setProgress(Math.min(7, calculateStreak(logs)));
+                int streak = calculateStreak(logs);
+                binding.tvStreakValue.setText(String.valueOf(streak));
+                binding.tvFlame.setText(streak == 0 ? "💧" : "🔥");
+                updateStreakSegments(streak);
                 bindToday(logs);
             }
 
@@ -75,6 +82,20 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
+    private void updateStreakSegments(int streak) {
+        int activeColor = ContextCompat.getColor(requireContext(), R.color.primary);
+        int inactiveColor = ContextCompat.getColor(requireContext(), R.color.gray_300);
+        int displayStreak = Math.min(7, streak);
+
+        for (int i = 0; i < binding.llStreakSegments.getChildCount(); i++) {
+            View segment = binding.llStreakSegments.getChildAt(i);
+            if (segment.getBackground() != null) {
+                segment.getBackground().setTint(i < displayStreak ? activeColor : inactiveColor);
+            }
+        }
+    }
+
 
     private void bindToday(List<MoodLog> logs) {
         MoodLog today = null;
@@ -116,7 +137,54 @@ public class HomeFragment extends Fragment {
     }
 
     private int calculateStreak(List<MoodLog> logs) {
-        return logs.size();
+        if (logs == null || logs.isEmpty()) return 0;
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        long todayStart = cal.getTimeInMillis();
+
+        cal.add(Calendar.DAY_OF_YEAR, -1);
+        long yesterdayStart = cal.getTimeInMillis();
+
+        int streak = 0;
+        long lastDateStart = -1;
+        boolean hasCurrentActivity = false;
+
+        for (MoodLog log : logs) {
+            if (log.getCreatedAt() == null) continue;
+
+            Calendar logCal = Calendar.getInstance();
+            logCal.setTime(log.getCreatedAt().toDate());
+            logCal.set(Calendar.HOUR_OF_DAY, 0);
+            logCal.set(Calendar.MINUTE, 0);
+            logCal.set(Calendar.SECOND, 0);
+            logCal.set(Calendar.MILLISECOND, 0);
+            long logStart = logCal.getTimeInMillis();
+
+            if (logStart == todayStart || logStart == yesterdayStart) {
+                hasCurrentActivity = true;
+            }
+
+            if (lastDateStart == -1) {
+                streak = 1;
+                lastDateStart = logStart;
+            } else if (logStart == lastDateStart) {
+                continue;
+            } else {
+                long diffDays = (lastDateStart - logStart) / (24 * 60 * 60 * 1000);
+                if (diffDays == 1) {
+                    streak++;
+                    lastDateStart = logStart;
+                } else {
+                    break;
+                }
+            }
+        }
+
+        return hasCurrentActivity ? streak : 0;
     }
 
     @Override

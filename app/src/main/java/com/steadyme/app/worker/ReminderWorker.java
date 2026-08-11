@@ -11,6 +11,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
+import com.steadyme.app.data.FirebaseRepository;
+
 /**
  * WorkManager survives restarts and uses the OS scheduler for a daily check-in reminder.
  */
@@ -24,6 +26,11 @@ public class ReminderWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
+        String title = "How are you today?";
+        String message = "Checking in on you. It only takes a second to log your current emotion.";
+
+        new FirebaseRepository().saveNotification(title, message);
+
         NotificationManager notificationManager = getApplicationContext().getSystemService(NotificationManager.class);
 
         if (Build.VERSION.SDK_INT >= 26) {
@@ -32,9 +39,10 @@ public class ReminderWorker extends Worker {
 
         Notification notification = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                 .setSmallIcon(android.R.drawable.ic_dialog_info)
-                .setContentTitle("How are you feeling?")
-                .setContentText("Take a moment to log today's mood in SteadyMe.")
+                .setContentTitle(title)
+                .setContentText(message)
                 .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .build();
 
         notificationManager.notify(1001, notification);

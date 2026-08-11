@@ -1,6 +1,7 @@
 package com.steadyme.app.ui;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,10 +12,13 @@ import com.steadyme.app.model.MoodLog;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MoodLogAdapter extends RecyclerView.Adapter<MoodLogAdapter.Holder> {
     private final List<MoodLog> items = new ArrayList<>();
+    private final Set<String> expandedIds = new HashSet<>();
 
     public void submit(List<MoodLog> logs) {
         items.clear();
@@ -30,7 +34,18 @@ public class MoodLogAdapter extends RecyclerView.Adapter<MoodLogAdapter.Holder> 
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        holder.bind(items.get(position));
+        MoodLog item = items.get(position);
+        boolean isExpanded = expandedIds.contains(item.getId());
+        holder.bind(item, isExpanded);
+
+        holder.itemView.setOnClickListener(v -> {
+            if (isExpanded) {
+                expandedIds.remove(item.getId());
+            } else {
+                expandedIds.add(item.getId());
+            }
+            notifyItemChanged(position);
+        });
     }
 
     @Override
@@ -46,17 +61,33 @@ public class MoodLogAdapter extends RecyclerView.Adapter<MoodLogAdapter.Holder> 
             this.binding = binding;
         }
 
-        void bind(MoodLog moodLog) {
+        void bind(MoodLog moodLog, boolean isExpanded) {
             binding.tvEmotion.setText(moodLog.getEmotion());
             binding.tvEmotion.setTextColor(MoodPalette.color(binding.getRoot().getContext(), moodLog.getEmotion()));
             binding.tvMoodEmoji.setImageResource(MoodPalette.iconRes(moodLog.getEmotion()));
             binding.tvMoodEmoji.getBackground().setTint(MoodPalette.paleColor(binding.getRoot().getContext(), moodLog.getEmotion()));
             binding.cardMoodLog.setCardBackgroundColor(MoodPalette.palestColor(binding.getRoot().getContext(), moodLog.getEmotion()));
+
             binding.tvNotes.setText(moodLog.getNotes() == null || moodLog.getNotes().isEmpty() ? "No notes added" : moodLog.getNotes());
+            binding.tvNotes.setMaxLines(isExpanded ? Integer.MAX_VALUE : 2);
+            binding.tvNotes.setEllipsize(isExpanded ? null : android.text.TextUtils.TruncateAt.END);
+
+            binding.llDetails.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+            if (isExpanded) {
+                binding.tvScoreDetail.setText(moodLog.getScore() + "/5");
+                binding.tvSourceDetail.setVisibility(View.GONE);
+                
+                if (moodLog.getReasons() != null && !moodLog.getReasons().isEmpty()) {
+                    binding.tvTriggersLabel.setVisibility(View.VISIBLE);
+                    binding.tvTriggersDetail.setVisibility(View.VISIBLE);
+                    binding.tvTriggersDetail.setText(String.join(", ", moodLog.getReasons()));
+                } else {
+                    binding.tvTriggersLabel.setVisibility(View.GONE);
+                    binding.tvTriggersDetail.setVisibility(View.GONE);
+                }
+            }
 
             binding.tvDate.setText(moodLog.getCreatedAt() == null ? "Saving…" : DateFormat.getDateInstance(DateFormat.MEDIUM).format(moodLog.getCreatedAt().toDate()));
         }
-
-
     }
 }

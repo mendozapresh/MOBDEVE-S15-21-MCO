@@ -11,7 +11,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp">
+        android:paddingHorizontal="20dp"
+        android:paddingTop="54dp"
+        android:paddingBottom="40dp">
 
         <TextView
             android:id="@+id/tvInsightsTitle"
@@ -19,8 +21,7 @@
             android:layout_height="wrap_content"
             android:text="Insights"
             android:textColor="@color/black"
-            android:textSize="28sp"
-
+            android:textSize="32sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,8 +33,8 @@
             android:layout_marginTop="8dp"
             android:text="Your emotional patterns at a glance"
             android:textColor="@color/gray_600"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvInsightsTitle" />
 
@@ -47,278 +48,371 @@
             android:weightSum="3"
             app:layout_constraintTop_toBottomOf="@id/tvInsightSummary">
 
-            <!-- Total Logs Box -->
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:background="@color/gray_100"
-                android:gravity="center"
+                app:cardBackgroundColor="@color/gray_100"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
 
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <TextView
-                    android:id="@+id/tvTotalLogs"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
 
-                    android:textStyle="bold"
-                    tools:text="14" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📋"
+                        android:textSize="22sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="TOTAL LOGS"
-                    android:textColor="@color/gray_600"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/tvTotalLogs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:text="14" />
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="TOTAL LOGS"
+                        android:textColor="@color/gray_800"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            <!-- Day Streak Box -->
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:background="@color/gray_100"
-                android:gravity="center"
+                app:cardBackgroundColor="@color/gray_100"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
 
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <TextView
-                    android:id="@+id/tvDayStreak"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
 
-                    android:textStyle="bold"
-                    tools:text="14d" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🔥"
+                        android:textSize="22sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="DAY STREAK"
-                    android:textColor="@color/gray_600"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/tvDayStreak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:text="14d" />
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="DAY STREAK"
+                        android:textColor="@color/gray_800"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            <!-- This Week Box -->
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/gray_100"
-                android:gravity="center"
+                app:cardBackgroundColor="@color/gray_100"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
 
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <TextView
-                    android:id="@+id/tvThisWeek"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
 
-                    android:textStyle="bold"
-                    tools:text="7/7" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📅"
+                        android:textSize="22sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="THIS WEEK"
-                    android:textColor="@color/gray_600"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/tvThisWeek"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:text="7/7" />
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="THIS WEEK"
+                        android:textColor="@color/gray_800"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
         </LinearLayout>
 
-        <!-- 2. Dynamic Description Card -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clDynamicDesc"
+        <!-- 2. Mood Stability & Avg Score Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardStability"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@color/gray_100"
-            android:padding="16dp"
-
+            app:cardBackgroundColor="@color/insight_blue_bg"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
             app:layout_constraintTop_toBottomOf="@id/llTopCounters">
 
-            <TextView
-                android:id="@+id/tvDynamicTitle"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/warning_orange"
-                android:textStyle="bold"
+                android:orientation="horizontal"
+                android:padding="18dp"
+                android:weightSum="2">
 
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Significant Mood Swing" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvDynamicDesc"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/gray_800"
-                app:layout_constraintEnd_toEndOf="parent"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="STABILITY"
+                        android:textColor="@color/gray_600"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
 
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvDynamicTitle"
-                tools:text="A large mood shift was detected in recent entries." />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/tvStability"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/black"
+                        android:textSize="19sp"
+                        android:textStyle="bold"
+                        tools:text="Highly Stable" />
+                </LinearLayout>
 
-        <!-- 3. Existing Mood Trend LineChart -->
-        <LinearLayout
-            android:id="@+id/llTrendContainer"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AVG SCORE"
+                        android:textColor="@color/gray_600"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvAvgThisWeek"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/black"
+                        android:textSize="19sp"
+                        android:textStyle="bold"
+                        tools:text="4.2 / 5" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 3. Top Reasons Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardReasons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@color/gray_100"
-            android:orientation="vertical"
-            android:padding="16dp"
+            app:cardBackgroundColor="@color/surface_soft"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:layout_constraintTop_toBottomOf="@id/cardStability">
 
-            app:layout_constraintTop_toBottomOf="@id/clDynamicDesc">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mood Trend"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-
-                android:textStyle="bold" />
-
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/chartMood"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="12dp" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        <!-- 4. Mood Distribution PieChart -->
-        <LinearLayout
-            android:id="@+id/llDistributionContainer"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TOP REASONS"
+                    android:textColor="@color/gray_600"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvTopReasons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="6dp"
+                    tools:text="1. Lack of sleep (4 times)\n2. Work pressure (3 times)" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 4. Dynamic Description (Persistent Low Mood / etc) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardDynamicDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@color/gray_100"
-            android:orientation="vertical"
-            android:padding="16dp"
+            app:cardBackgroundColor="@color/insight_pink_bg"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:layout_constraintTop_toBottomOf="@id/cardReasons">
 
-            app:layout_constraintTop_toBottomOf="@id/llTrendContainer">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mood Distribution"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-
-                android:textStyle="bold" />
-
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/chartMoodDistribution"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginTop="12dp" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:padding="16dp">
 
-        <!-- 5. Mood Consistency -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clConsistency"
+                <TextView
+                    android:id="@+id/tvDynamicTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ANALYSIS"
+                    android:textColor="@color/gray_600"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvDynamicTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="19sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvDynamicTitleLabel"
+                    tools:text="Persistent Low Mood" />
+
+                <TextView
+                    android:id="@+id/tvDynamicDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvDynamicTitle"
+                    tools:text="A large mood shift was detected in recent entries." />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 5. Mood Distribution Chart -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardDistribution"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@color/gray_100"
-            android:padding="16dp"
+            app:cardBackgroundColor="@color/insight_orange_bg"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:layout_constraintTop_toBottomOf="@id/cardDynamicDesc">
 
-            app:layout_constraintTop_toBottomOf="@id/llDistributionContainer">
-
-            <TextView
-                android:id="@+id/tvConsistencyHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mood Consistency"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvAvgThisWeek"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textAlignment="center"
-                android:textColor="@color/gray_600"
-                app:layout_constraintEnd_toStartOf="@id/tvStability"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvConsistencyHeader"
-                tools:text="AVG THIS WEEK\nN/A" />
-
-            <TextView
-                android:id="@+id/tvStability"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textColor="@color/stable_green"
-                android:textStyle="bold"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tvAvgThisWeek"
-                app:layout_constraintTop_toTopOf="@id/tvAvgThisWeek"
-                tools:text="STABILITY\nHighly Stable" />
-
-            <!-- Consistency Score Progress Bar -->
-            <TextView
-                android:id="@+id/tvScoreLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Consistency Score"
-                android:textColor="@color/gray_600"
-                app:layout_constraintStart_toStartOf="parent"
-
-                app:layout_constraintTop_toBottomOf="@id/tvAvgThisWeek" />
-
-            <TextView
-                android:id="@+id/tvScorePercent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/stable_green"
-                android:textStyle="bold"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvScoreLabel"
-                tools:text="85%" />
-
-            <ProgressBar
-                android:id="@+id/pbConsistency"
-                style="?android:attr/progressBarStyleHorizontal"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:max="100"
-                android:progressTint="@color/stable_green"
-                app:layout_constraintTop_toBottomOf="@id/tvScoreLabel" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MOOD DISTRIBUTION"
+                    android:textColor="@color/gray_600"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/chartMoodDistribution"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="12dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 6. Mood Trend Chart -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardTrend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="@color/insight_green_bg"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:layout_constraintTop_toBottomOf="@id/cardDistribution">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MOOD TREND"
+                    android:textColor="@color/gray_600"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chartMood"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="12dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

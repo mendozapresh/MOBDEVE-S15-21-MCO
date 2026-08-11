@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:1:1-25:12
-INJECTED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:1:1-25:12
-INJECTED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:1:1-25:12
-INJECTED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:1:1-25:12
+ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:1:1-27:12
+INJECTED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:1:1-27:12
+INJECTED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:1:1-27:12
+INJECTED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:1:1-27:12
 MERGED from [androidx.databinding:viewbinding:8.5.2] C:\Users\Precious\.gradle\caches\9.3.0\transforms\4dc8250c704fd9bb808b447a24da93db\workspace\transformed\jetified-viewbinding-8.5.2\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\Precious\.gradle\caches\9.3.0\transforms\ed369a2ac13eaeda95441727e4514218\workspace\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] C:\Users\Precious\.gradle\caches\9.3.0\transforms\e368d23e62040da4a9da4c87113cc4e0\workspace\transformed\constraintlayout-2.2.0\AndroidManifest.xml:2:1-9:12
@@ -112,8 +112,8 @@ ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOB
 	android:name
 		ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:3:22-74
 application
-ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:4:5-24:19
-INJECTED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:4:5-24:19
+ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:4:5-26:19
+INJECTED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:4:5-26:19
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\Precious\.gradle\caches\9.3.0\transforms\ed369a2ac13eaeda95441727e4514218\workspace\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\Precious\.gradle\caches\9.3.0\transforms\ed369a2ac13eaeda95441727e4514218\workspace\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] C:\Users\Precious\.gradle\caches\9.3.0\transforms\e368d23e62040da4a9da4c87113cc4e0\workspace\transformed\constraintlayout-2.2.0\AndroidManifest.xml:7:5-20
@@ -210,26 +210,34 @@ activity#com.steadyme.app.CameraLogActivity
 ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:18:9-55
 	android:name
 		ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:18:19-52
+activity#com.steadyme.app.MoodIntensityActivity
+ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:19:9-59
+	android:name
+		ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:19:19-56
+activity#com.steadyme.app.ReasonsActivity
+ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:20:9-53
+	android:name
+		ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:20:19-50
 activity#com.steadyme.app.AddNoteActivity
-ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:19:9-53
+ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:21:9-53
 	android:name
-		ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:19:19-50
+		ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:21:19-50
 activity#com.steadyme.app.EntrySavedActivity
-ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:20:9-56
+ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:22:9-56
 	android:name
-		ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:20:19-53
+		ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:22:19-53
 activity#com.steadyme.app.MainActivity
-ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:21:9-50
+ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:23:9-50
 	android:name
-		ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:21:19-47
+		ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:23:19-47
 activity#com.steadyme.app.SignupActivity
-ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:22:9-52
+ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:24:9-52
 	android:name
-		ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:22:19-49
+		ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:24:19-49
 activity#com.steadyme.app.LoginActivity
-ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:23:9-51
+ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:25:9-51
 	android:name
-		ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:23:19-48
+		ADDED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml:25:19-48
 uses-sdk
 INJECTED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Precious\Downloads\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\MOBDEVE-S15-21-MCO\app\src\main\AndroidManifest.xml

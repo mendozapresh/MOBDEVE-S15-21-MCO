@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,7 +36,10 @@ public final class FragmentHomeBinding implements ViewBinding {
   public final ImageView ivLogout;
 
   @NonNull
-  public final ProgressBar progressStreak;
+  public final LinearLayout llHotline;
+
+  @NonNull
+  public final LinearLayout llStreakSegments;
 
   @NonNull
   public final RecyclerView rvRecent;
@@ -82,19 +85,20 @@ public final class FragmentHomeBinding implements ViewBinding {
 
   private FragmentHomeBinding(@NonNull ConstraintLayout rootView,
       @NonNull MaterialCardView cardStreak, @NonNull MaterialCardView cardToday,
-      @NonNull ImageView ivBell, @NonNull ImageView ivLogout, @NonNull ProgressBar progressStreak,
-      @NonNull RecyclerView rvRecent, @NonNull TextView tvDays, @NonNull TextView tvFlame,
-      @NonNull TextView tvGreeting, @NonNull TextView tvGreetingName, @NonNull TextView tvHotline,
-      @NonNull TextView tvRecent, @NonNull TextView tvSeeAll, @NonNull TextView tvStreakLabel,
-      @NonNull TextView tvStreakValue, @NonNull ImageView tvTodayEmoji,
-      @NonNull TextView tvTodayEmotion, @NonNull TextView tvTodayLabel,
-      @NonNull TextView tvTodayNote) {
+      @NonNull ImageView ivBell, @NonNull ImageView ivLogout, @NonNull LinearLayout llHotline,
+      @NonNull LinearLayout llStreakSegments, @NonNull RecyclerView rvRecent,
+      @NonNull TextView tvDays, @NonNull TextView tvFlame, @NonNull TextView tvGreeting,
+      @NonNull TextView tvGreetingName, @NonNull TextView tvHotline, @NonNull TextView tvRecent,
+      @NonNull TextView tvSeeAll, @NonNull TextView tvStreakLabel, @NonNull TextView tvStreakValue,
+      @NonNull ImageView tvTodayEmoji, @NonNull TextView tvTodayEmotion,
+      @NonNull TextView tvTodayLabel, @NonNull TextView tvTodayNote) {
     this.rootView = rootView;
     this.cardStreak = cardStreak;
     this.cardToday = cardToday;
     this.ivBell = ivBell;
     this.ivLogout = ivLogout;
-    this.progressStreak = progressStreak;
+    this.llHotline = llHotline;
+    this.llStreakSegments = llStreakSegments;
     this.rvRecent = rvRecent;
     this.tvDays = tvDays;
     this.tvFlame = tvFlame;
@@ -162,9 +166,15 @@ public final class FragmentHomeBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.progressStreak;
-      ProgressBar progressStreak = ViewBindings.findChildViewById(rootView, id);
-      if (progressStreak == null) {
+      id = R.id.llHotline;
+      LinearLayout llHotline = ViewBindings.findChildViewById(rootView, id);
+      if (llHotline == null) {
+        break missingId;
+      }
+
+      id = R.id.llStreakSegments;
+      LinearLayout llStreakSegments = ViewBindings.findChildViewById(rootView, id);
+      if (llStreakSegments == null) {
         break missingId;
       }
 
@@ -253,9 +263,9 @@ public final class FragmentHomeBinding implements ViewBinding {
       }
 
       return new FragmentHomeBinding((ConstraintLayout) rootView, cardStreak, cardToday, ivBell,
-          ivLogout, progressStreak, rvRecent, tvDays, tvFlame, tvGreeting, tvGreetingName,
-          tvHotline, tvRecent, tvSeeAll, tvStreakLabel, tvStreakValue, tvTodayEmoji, tvTodayEmotion,
-          tvTodayLabel, tvTodayNote);
+          ivLogout, llHotline, llStreakSegments, rvRecent, tvDays, tvFlame, tvGreeting,
+          tvGreetingName, tvHotline, tvRecent, tvSeeAll, tvStreakLabel, tvStreakValue, tvTodayEmoji,
+          tvTodayEmotion, tvTodayLabel, tvTodayNote);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -3,7 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:background="@color/white"
+    android:paddingHorizontal="20dp"
+
+    android:paddingTop="74dp"
+    android:paddingBottom="20dp">
 
     <TextView
         android:id="@+id/tvGreeting"
@@ -11,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="Good evening,"
         android:textColor="@color/text_secondary"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@id/ivBell"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,11 +25,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="there 👋"
-        android:textSize="26sp"
+        android:textColor="@color/black"
+        android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/ivBell"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvGreeting" />
+
 
     <ImageView
         android:id="@+id/ivBell"
@@ -44,10 +51,12 @@
         android:id="@+id/ivLogout"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="14dp"
         android:background="@drawable/bg_circle_filled"
         android:backgroundTint="@color/logout_bg"
         android:contentDescription="Log out"
+
+
         android:padding="10dp"
         android:src="@drawable/ic_logout_arrow"
         app:layout_constraintBottom_toBottomOf="@id/tvGreetingName"
@@ -62,9 +71,11 @@
         app:cardBackgroundColor="@color/surface_soft"
         app:cardCornerRadius="14dp"
         app:cardElevation="0dp"
+        app:strokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvGreetingName">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -76,8 +87,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="CURRENT STREAK"
-                android:textColor="@color/primary"
-                android:textSize="12sp"
+                android:textColor="@color/gray_600"
+                android:textSize="11sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/tvFlame"
                 app:layout_constraintStart_toStartOf="parent"
@@ -88,19 +99,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="🔥"
-                android:textSize="22sp"
+                android:textSize="56sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+
+
 
             <TextView
                 android:id="@+id/tvStreakValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
+                android:textColor="@color/black"
                 android:textSize="44sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvStreakLabel" />
+
 
             <TextView
                 android:id="@+id/tvDays"
@@ -113,17 +129,68 @@
                 app:layout_constraintBaseline_toBaselineOf="@id/tvStreakValue"
                 app:layout_constraintStart_toEndOf="@id/tvStreakValue" />
 
-            <ProgressBar
-                android:id="@+id/progressStreak"
-                style="?android:attr/progressBarStyleHorizontal"
+            <LinearLayout
+                android:id="@+id/llStreakSegments"
                 android:layout_width="0dp"
                 android:layout_height="8dp"
-                android:layout_marginTop="10dp"
-                android:max="7"
-                android:progressTint="@color/primary"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                android:weightSum="7"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvStreakValue" />
+                app:layout_constraintTop_toBottomOf="@id/tvStreakValue">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_rounded_card"
+                    android:backgroundTint="@color/gray_300" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_rounded_card"
+                    android:backgroundTint="@color/gray_300" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_rounded_card"
+                    android:backgroundTint="@color/gray_300" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_rounded_card"
+                    android:backgroundTint="@color/gray_300" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_rounded_card"
+                    android:backgroundTint="@color/gray_300" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_rounded_card"
+                    android:backgroundTint="@color/gray_300" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_rounded_card"
+                    android:backgroundTint="@color/gray_300" />
+
+            </LinearLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -135,8 +202,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="TODAY"
-        android:textColor="@color/text_secondary"
-        android:textSize="12sp"
+        android:textColor="@color/gray_600"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardStreak" />
@@ -148,7 +215,11 @@
         android:layout_marginTop="10dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp"
+        app:strokeWidth="0dp"
+
         app:layout_constraintEnd_toEndOf="parent"
+
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTodayLabel">
 
@@ -162,7 +233,8 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:background="@drawable/bg_circle_filled"
-                android:scaleType="centerInside"
+                android:scaleType="fitCenter"
+                android:padding="0dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -199,8 +271,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:text="RECENT"
-        android:textColor="@color/text_secondary"
-        android:textSize="12sp"
+        android:textColor="@color/gray_600"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/tvSeeAll"
         app:layout_constraintStart_toStartOf="parent"
@@ -222,22 +294,42 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
-        app:layout_constraintBottom_toTopOf="@id/tvHotline"
+        app:layout_constraintBottom_toTopOf="@id/llHotline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvRecent" />
 
-    <TextView
-        android:id="@+id/tvHotline"
+
+    <LinearLayout
+        android:id="@+id/llHotline"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:gravity="center"
-        android:text="Need immediate help? Call Hotline"
-        android:textColor="@color/text_secondary"
-        android:textSize="13sp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Need immediate help? "
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvHotline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call Hotline"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

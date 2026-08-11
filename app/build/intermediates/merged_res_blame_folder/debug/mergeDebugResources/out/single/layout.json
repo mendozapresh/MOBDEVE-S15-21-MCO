@@ -8,12 +8,28 @@
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_splash.xml"
     },
     {
+        "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\activity_triggers.xml",
+        "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_triggers.xml"
+    },
+    {
+        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/fragment_log_options.xml",
+        "source": "com.steadyme.app-main-54:/layout/fragment_log_options.xml"
+    },
+    {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\activity_signup.xml",
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_signup.xml"
     },
     {
+        "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\activity_reasons.xml",
+        "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_reasons.xml"
+    },
+    {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\fragment_log_options.xml",
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\fragment_log_options.xml"
+    },
+    {
+        "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\item_notification.xml",
+        "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\item_notification.xml"
     },
     {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\activity_entry_saved.xml",
@@ -24,12 +40,20 @@
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\fragment_home.xml"
     },
     {
+        "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\activity_mood_intensity.xml",
+        "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_mood_intensity.xml"
+    },
+    {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\fragment_manual_log.xml",
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\fragment_manual_log.xml"
     },
     {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\activity_camera_log.xml",
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_camera_log.xml"
+    },
+    {
+        "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\fragment_notifications.xml",
+        "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\fragment_notifications.xml"
     },
     {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\fragment_insights.xml",
@@ -40,16 +64,12 @@
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_login.xml"
     },
     {
-        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/item_mood_log.xml",
-        "source": "com.steadyme.app-main-54:/layout/item_mood_log.xml"
-    },
-    {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\item_mood_log.xml",
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\item_mood_log.xml"
     },
     {
-        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/activity_camera_log.xml",
-        "source": "com.steadyme.app-main-54:/layout/activity_camera_log.xml"
+        "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\activity_add_note.xml",
+        "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_add_note.xml"
     },
     {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\fragment_profile.xml",
@@ -58,17 +78,5 @@
     {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\activity_main.xml",
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_main.xml"
-    },
-    {
-        "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-mergeDebugResources-51:\\layout\\activity_add_note.xml",
-        "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_add_note.xml"
-    },
-    {
-        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/fragment_home.xml",
-        "source": "com.steadyme.app-main-54:/layout/fragment_home.xml"
-    },
-    {
-        "merged": "com.steadyme.app-mergeDebugResources-51:/layout/fragment_manual_log.xml",
-        "source": "com.steadyme.app-main-54:/layout/fragment_manual_log.xml"
     }
 ]

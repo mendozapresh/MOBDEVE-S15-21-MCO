@@ -7,11 +7,11 @@
     android:background="#FFFFFF"
     android:padding="20dp">
 
-    <!-- Custom Back Button matching the User Profile screen -->
     <ImageButton
         android:id="@+id/btnBackNote"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginTop="20dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@android:drawable/ic_menu_revert"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,27 +19,28 @@
 
     <!-- Title adjusted to sit perfectly next to the new back button -->
     <TextView
+        android:id="@+id/tvNoteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
         android:text="Add a Note"
         android:textColor="#000000"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/btnBackNote"
         app:layout_constraintStart_toEndOf="@id/btnBackNote"
-        app:layout_constraintTop_toTopOf="@id/btnBackNote" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvNoteHint"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:text="Anything else? (optional)"
         android:textColor="#666666"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnBackNote" />
+        app:layout_constraintTop_toBottomOf="@id/tvNoteTitle" />
 
     <EditText
         android:id="@+id/etNote"

@@ -34,6 +34,8 @@ public class CameraLogActivity extends AppCompatActivity {
     private ActivityCameraLogBinding binding;
     private ExecutorService cameraExecutor;
     private volatile boolean faceDetected = false;
+    private volatile boolean eyebrowsFurrowed = false;
+    private volatile boolean eyebrowsRaised = false;
     private volatile Float latestSmiling, latestLeftEyeOpen, latestRightEyeOpen;
     private String pendingEmotion;
     private int pendingScore;
@@ -46,22 +48,24 @@ public class CameraLogActivity extends AppCompatActivity {
 
         cameraExecutor = Executors.newSingleThreadExecutor();
 
-        binding.btnCloseCamera.setOnClickListener(v -> finish());
+        binding.btnBackCamera.setOnClickListener(v -> finish());
+        binding.btnBackCamera.bringToFront();
         binding.btnScan.setOnClickListener(v -> scan());
+
         binding.btnRetry.setOnClickListener(v -> showScan());
         binding.btnUseEmotion.setOnClickListener(v -> proceed(pendingEmotion, pendingScore));
 
         // finish() handles returning to the previous screen safely
         binding.btnSwitchManual.setOnClickListener(v -> finish());
 
-        binding.btnCamHappy.setOnClickListener(v -> proceed("Happy", 8));
-        binding.btnCamElated.setOnClickListener(v -> proceed("Elated", 10));
-        binding.btnCamCalm.setOnClickListener(v -> proceed("Calm", 7));
-        binding.btnCamTired.setOnClickListener(v -> proceed("Tired", 4));
-        binding.btnCamSad.setOnClickListener(v -> proceed("Sad", 2));
-        binding.btnCamAnxious.setOnClickListener(v -> proceed("Anxious", 3));
-        binding.btnCamFrustrated.setOnClickListener(v -> proceed("Frustrated", 3));
-        binding.btnCamAngry.setOnClickListener(v -> proceed("Angry", 2));
+        binding.btnCamHappy.setOnClickListener(v -> proceed("Happy", 4));
+        binding.btnCamElated.setOnClickListener(v -> proceed("Elated", 5));
+        binding.btnCamCalm.setOnClickListener(v -> proceed("Calm", 3));
+        binding.btnCamTired.setOnClickListener(v -> proceed("Tired", 2));
+        binding.btnCamSad.setOnClickListener(v -> proceed("Sad", 1));
+        binding.btnCamAnxious.setOnClickListener(v -> proceed("Anxious", 2));
+        binding.btnCamFrustrated.setOnClickListener(v -> proceed("Frustrated", 2));
+        binding.btnCamAngry.setOnClickListener(v -> proceed("Angry", 1));
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             startCamera();
@@ -96,6 +100,7 @@ public class CameraLogActivity extends AppCompatActivity {
                         new FaceDetectorOptions.Builder()
                                 .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
                                 .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_ALL)
+                                .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL)
                                 .build()
                 );
 
@@ -113,6 +118,17 @@ public class CameraLogActivity extends AppCompatActivity {
                                     latestSmiling = face.getSmilingProbability();
                                     latestLeftEyeOpen = face.getLeftEyeOpenProbability();
                                     latestRightEyeOpen = face.getRightEyeOpenProbability();
+
+                                    // Detect eyebrow movement
+                                    com.google.mlkit.vision.face.FaceContour leftBrow = face.getContour(com.google.mlkit.vision.face.FaceContour.LEFT_EYEBROW_TOP);
+                                    if (leftBrow != null && leftBrow.getPoints().size() >= 5) {
+                                        float innerY = leftBrow.getPoints().get(0).y;
+                                        float outerY = leftBrow.getPoints().get(4).y;
+                                        // Inner brow lower than outer brow = furrowed (Angry)
+                                        eyebrowsFurrowed = innerY > (outerY + 8);
+                                        // Inner brow higher than outer brow = raised (Anxious)
+                                        eyebrowsRaised = innerY < (outerY - 5);
+                                    }
                                 }
 
                                 // Safely updating UI from a background thread using View.post()
@@ -149,36 +165,49 @@ public class CameraLogActivity extends AppCompatActivity {
             return;
         }
 
-        float smiling = latestSmiling == null ? 0.5f : latestSmiling;
-        float leftOpen = latestLeftEyeOpen == null ? 1f : latestLeftEyeOpen;
-        float rightOpen = latestRightEyeOpen == null ? 1f : latestRightEyeOpen;
+        float smiling = latestSmiling == null ? 0.2f : latestSmiling;
+        float leftOpen = latestLeftEyeOpen == null ? 0.9f : latestLeftEyeOpen;
+        float rightOpen = latestRightEyeOpen == null ? 0.9f : latestRightEyeOpen;
         float avgEyesOpen = (leftOpen + rightOpen) / 2f;
+        
         String emotion;
-
         int score;
-        int confidence;
 
-        if (smiling >= 0.6f) {
+        // Refined Clinical Emotion Detection Logic
+        if (smiling >= 0.85f) {
+            emotion = "Elated";
+            score = 5;
+        } else if (smiling >= 0.45f) {
             emotion = "Happy";
-            score = 8;
-            confidence = Math.round(smiling * 100);
-        } else if (avgEyesOpen <= 0.4f) {
-            emotion = "Tired";
             score = 4;
-            confidence = Math.round((1 - avgEyesOpen) * 100);
-        } else if (smiling <= 0.15f) {
-            emotion = "Sad";
+        } else if (avgEyesOpen <= 0.35f) {
+            emotion = "Tired";
             score = 2;
-            confidence = Math.round((1 - smiling) * 100);
+        } else if (eyebrowsFurrowed && smiling <= 0.12f) {
+            // ANGRY: Furrowed brows (turned down) + No smile
+            emotion = "Angry";
+            score = 1;
+        } else if (eyebrowsFurrowed && avgEyesOpen <= 0.75f) {
+            // FRUSTRATED: Stressed look (furrowed + eye tension)
+            emotion = "Frustrated";
+            score = 2;
+        } else if (eyebrowsRaised) {
+            // ANXIOUS: Brows turned up (Raised inner brows)
+            emotion = "Anxious";
+            score = 2;
+        } else if (smiling <= 0.12f) {
+            // SAD: Frown (Low smile probability)
+            emotion = "Sad";
+            score = 1;
         } else {
+            // CALM: Neutral baseline
             emotion = "Calm";
-            score = 7;
-            confidence = Math.round((1 - Math.abs(smiling - 0.5f) * 2) * 100);
+            score = 3;
         }
 
         pendingEmotion = emotion;
         pendingScore = score;
-        binding.tvDetected.setText("Detected: " + emotion + " (" + confidence + "%)");
+        binding.tvDetected.setText("Detected: " + emotion);
         showResult();
     }
 
@@ -195,10 +224,9 @@ public class CameraLogActivity extends AppCompatActivity {
     }
 
     private void proceed(String emotion, int score) {
-        Intent intent = new Intent(this, AddNoteActivity.class);
-        intent.putExtra(AddNoteActivity.EXTRA_EMOTION, emotion);
-        intent.putExtra(AddNoteActivity.EXTRA_SCORE, score);
-        intent.putExtra(AddNoteActivity.EXTRA_SOURCE, "camera");
+        Intent intent = new Intent(this, MoodIntensityActivity.class);
+        intent.putExtra(MoodIntensityActivity.EXTRA_EMOTION, emotion);
+        intent.putExtra(MoodIntensityActivity.EXTRA_SOURCE, "camera");
         startActivity(intent);
     }
 

@@ -5,16 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.google.android.material.card.MaterialCardView;
 import com.steadyme.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -25,34 +24,31 @@ public final class FragmentInsightsBinding implements ViewBinding {
   private final NestedScrollView rootView;
 
   @NonNull
+  public final MaterialCardView cardDistribution;
+
+  @NonNull
+  public final MaterialCardView cardDynamicDesc;
+
+  @NonNull
+  public final MaterialCardView cardReasons;
+
+  @NonNull
+  public final MaterialCardView cardStability;
+
+  @NonNull
+  public final MaterialCardView cardTrend;
+
+  @NonNull
   public final LineChart chartMood;
 
   @NonNull
   public final PieChart chartMoodDistribution;
 
   @NonNull
-  public final ConstraintLayout clConsistency;
-
-  @NonNull
-  public final ConstraintLayout clDynamicDesc;
-
-  @NonNull
-  public final LinearLayout llDistributionContainer;
-
-  @NonNull
   public final LinearLayout llTopCounters;
 
   @NonNull
-  public final LinearLayout llTrendContainer;
-
-  @NonNull
-  public final ProgressBar pbConsistency;
-
-  @NonNull
   public final TextView tvAvgThisWeek;
-
-  @NonNull
-  public final TextView tvConsistencyHeader;
 
   @NonNull
   public final TextView tvDayStreak;
@@ -64,16 +60,13 @@ public final class FragmentInsightsBinding implements ViewBinding {
   public final TextView tvDynamicTitle;
 
   @NonNull
+  public final TextView tvDynamicTitleLabel;
+
+  @NonNull
   public final TextView tvInsightSummary;
 
   @NonNull
   public final TextView tvInsightsTitle;
-
-  @NonNull
-  public final TextView tvScoreLabel;
-
-  @NonNull
-  public final TextView tvScorePercent;
 
   @NonNull
   public final TextView tvStability;
@@ -82,38 +75,40 @@ public final class FragmentInsightsBinding implements ViewBinding {
   public final TextView tvThisWeek;
 
   @NonNull
+  public final TextView tvTopReasons;
+
+  @NonNull
   public final TextView tvTotalLogs;
 
-  private FragmentInsightsBinding(@NonNull NestedScrollView rootView, @NonNull LineChart chartMood,
-      @NonNull PieChart chartMoodDistribution, @NonNull ConstraintLayout clConsistency,
-      @NonNull ConstraintLayout clDynamicDesc, @NonNull LinearLayout llDistributionContainer,
-      @NonNull LinearLayout llTopCounters, @NonNull LinearLayout llTrendContainer,
-      @NonNull ProgressBar pbConsistency, @NonNull TextView tvAvgThisWeek,
-      @NonNull TextView tvConsistencyHeader, @NonNull TextView tvDayStreak,
+  private FragmentInsightsBinding(@NonNull NestedScrollView rootView,
+      @NonNull MaterialCardView cardDistribution, @NonNull MaterialCardView cardDynamicDesc,
+      @NonNull MaterialCardView cardReasons, @NonNull MaterialCardView cardStability,
+      @NonNull MaterialCardView cardTrend, @NonNull LineChart chartMood,
+      @NonNull PieChart chartMoodDistribution, @NonNull LinearLayout llTopCounters,
+      @NonNull TextView tvAvgThisWeek, @NonNull TextView tvDayStreak,
       @NonNull TextView tvDynamicDesc, @NonNull TextView tvDynamicTitle,
-      @NonNull TextView tvInsightSummary, @NonNull TextView tvInsightsTitle,
-      @NonNull TextView tvScoreLabel, @NonNull TextView tvScorePercent,
-      @NonNull TextView tvStability, @NonNull TextView tvThisWeek, @NonNull TextView tvTotalLogs) {
+      @NonNull TextView tvDynamicTitleLabel, @NonNull TextView tvInsightSummary,
+      @NonNull TextView tvInsightsTitle, @NonNull TextView tvStability,
+      @NonNull TextView tvThisWeek, @NonNull TextView tvTopReasons, @NonNull TextView tvTotalLogs) {
     this.rootView = rootView;
+    this.cardDistribution = cardDistribution;
+    this.cardDynamicDesc = cardDynamicDesc;
+    this.cardReasons = cardReasons;
+    this.cardStability = cardStability;
+    this.cardTrend = cardTrend;
     this.chartMood = chartMood;
     this.chartMoodDistribution = chartMoodDistribution;
-    this.clConsistency = clConsistency;
-    this.clDynamicDesc = clDynamicDesc;
-    this.llDistributionContainer = llDistributionContainer;
     this.llTopCounters = llTopCounters;
-    this.llTrendContainer = llTrendContainer;
-    this.pbConsistency = pbConsistency;
     this.tvAvgThisWeek = tvAvgThisWeek;
-    this.tvConsistencyHeader = tvConsistencyHeader;
     this.tvDayStreak = tvDayStreak;
     this.tvDynamicDesc = tvDynamicDesc;
     this.tvDynamicTitle = tvDynamicTitle;
+    this.tvDynamicTitleLabel = tvDynamicTitleLabel;
     this.tvInsightSummary = tvInsightSummary;
     this.tvInsightsTitle = tvInsightsTitle;
-    this.tvScoreLabel = tvScoreLabel;
-    this.tvScorePercent = tvScorePercent;
     this.tvStability = tvStability;
     this.tvThisWeek = tvThisWeek;
+    this.tvTopReasons = tvTopReasons;
     this.tvTotalLogs = tvTotalLogs;
   }
 
@@ -144,6 +139,36 @@ public final class FragmentInsightsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.cardDistribution;
+      MaterialCardView cardDistribution = ViewBindings.findChildViewById(rootView, id);
+      if (cardDistribution == null) {
+        break missingId;
+      }
+
+      id = R.id.cardDynamicDesc;
+      MaterialCardView cardDynamicDesc = ViewBindings.findChildViewById(rootView, id);
+      if (cardDynamicDesc == null) {
+        break missingId;
+      }
+
+      id = R.id.cardReasons;
+      MaterialCardView cardReasons = ViewBindings.findChildViewById(rootView, id);
+      if (cardReasons == null) {
+        break missingId;
+      }
+
+      id = R.id.cardStability;
+      MaterialCardView cardStability = ViewBindings.findChildViewById(rootView, id);
+      if (cardStability == null) {
+        break missingId;
+      }
+
+      id = R.id.cardTrend;
+      MaterialCardView cardTrend = ViewBindings.findChildViewById(rootView, id);
+      if (cardTrend == null) {
+        break missingId;
+      }
+
       id = R.id.chartMood;
       LineChart chartMood = ViewBindings.findChildViewById(rootView, id);
       if (chartMood == null) {
@@ -156,51 +181,15 @@ public final class FragmentInsightsBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.clConsistency;
-      ConstraintLayout clConsistency = ViewBindings.findChildViewById(rootView, id);
-      if (clConsistency == null) {
-        break missingId;
-      }
-
-      id = R.id.clDynamicDesc;
-      ConstraintLayout clDynamicDesc = ViewBindings.findChildViewById(rootView, id);
-      if (clDynamicDesc == null) {
-        break missingId;
-      }
-
-      id = R.id.llDistributionContainer;
-      LinearLayout llDistributionContainer = ViewBindings.findChildViewById(rootView, id);
-      if (llDistributionContainer == null) {
-        break missingId;
-      }
-
       id = R.id.llTopCounters;
       LinearLayout llTopCounters = ViewBindings.findChildViewById(rootView, id);
       if (llTopCounters == null) {
         break missingId;
       }
 
-      id = R.id.llTrendContainer;
-      LinearLayout llTrendContainer = ViewBindings.findChildViewById(rootView, id);
-      if (llTrendContainer == null) {
-        break missingId;
-      }
-
-      id = R.id.pbConsistency;
-      ProgressBar pbConsistency = ViewBindings.findChildViewById(rootView, id);
-      if (pbConsistency == null) {
-        break missingId;
-      }
-
       id = R.id.tvAvgThisWeek;
       TextView tvAvgThisWeek = ViewBindings.findChildViewById(rootView, id);
       if (tvAvgThisWeek == null) {
-        break missingId;
-      }
-
-      id = R.id.tvConsistencyHeader;
-      TextView tvConsistencyHeader = ViewBindings.findChildViewById(rootView, id);
-      if (tvConsistencyHeader == null) {
         break missingId;
       }
 
@@ -222,6 +211,12 @@ public final class FragmentInsightsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvDynamicTitleLabel;
+      TextView tvDynamicTitleLabel = ViewBindings.findChildViewById(rootView, id);
+      if (tvDynamicTitleLabel == null) {
+        break missingId;
+      }
+
       id = R.id.tvInsightSummary;
       TextView tvInsightSummary = ViewBindings.findChildViewById(rootView, id);
       if (tvInsightSummary == null) {
@@ -231,18 +226,6 @@ public final class FragmentInsightsBinding implements ViewBinding {
       id = R.id.tvInsightsTitle;
       TextView tvInsightsTitle = ViewBindings.findChildViewById(rootView, id);
       if (tvInsightsTitle == null) {
-        break missingId;
-      }
-
-      id = R.id.tvScoreLabel;
-      TextView tvScoreLabel = ViewBindings.findChildViewById(rootView, id);
-      if (tvScoreLabel == null) {
-        break missingId;
-      }
-
-      id = R.id.tvScorePercent;
-      TextView tvScorePercent = ViewBindings.findChildViewById(rootView, id);
-      if (tvScorePercent == null) {
         break missingId;
       }
 
@@ -258,17 +241,23 @@ public final class FragmentInsightsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvTopReasons;
+      TextView tvTopReasons = ViewBindings.findChildViewById(rootView, id);
+      if (tvTopReasons == null) {
+        break missingId;
+      }
+
       id = R.id.tvTotalLogs;
       TextView tvTotalLogs = ViewBindings.findChildViewById(rootView, id);
       if (tvTotalLogs == null) {
         break missingId;
       }
 
-      return new FragmentInsightsBinding((NestedScrollView) rootView, chartMood,
-          chartMoodDistribution, clConsistency, clDynamicDesc, llDistributionContainer,
-          llTopCounters, llTrendContainer, pbConsistency, tvAvgThisWeek, tvConsistencyHeader,
-          tvDayStreak, tvDynamicDesc, tvDynamicTitle, tvInsightSummary, tvInsightsTitle,
-          tvScoreLabel, tvScorePercent, tvStability, tvThisWeek, tvTotalLogs);
+      return new FragmentInsightsBinding((NestedScrollView) rootView, cardDistribution,
+          cardDynamicDesc, cardReasons, cardStability, cardTrend, chartMood, chartMoodDistribution,
+          llTopCounters, tvAvgThisWeek, tvDayStreak, tvDynamicDesc, tvDynamicTitle,
+          tvDynamicTitleLabel, tvInsightSummary, tvInsightsTitle, tvStability, tvThisWeek,
+          tvTopReasons, tvTotalLogs);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

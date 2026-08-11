@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:padding="24dp">
+    android:paddingHorizontal="24dp"
+    android:paddingTop="54dp"
+    android:paddingBottom="24dp">
 
 
     <!-- Profile Title (No back button) -->
@@ -15,11 +17,12 @@
         android:layout_height="wrap_content"
         android:text="My Profile"
         android:textColor="@color/black"
-        android:textSize="28sp"
-
+        android:textSize="32sp"
         android:textStyle="bold"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <!-- Avatar Placeholder -->
     <ImageView

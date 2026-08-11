@@ -1,19 +1,19 @@
 [
     {
+        "merged": "com.steadyme.app-debug-52:/layout_fragment_log_options.xml.flat",
+        "source": "com.steadyme.app-main-54:/layout/fragment_log_options.xml"
+    },
+    {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\layout_activity_splash.xml.flat",
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_splash.xml"
     },
     {
-        "merged": "com.steadyme.app-debug-52:/layout_fragment_manual_log.xml.flat",
-        "source": "com.steadyme.app-main-54:/layout/fragment_manual_log.xml"
+        "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\drawable_img_overwhelmed.png.flat",
+        "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\drawable\\img_overwhelmed.png"
     },
     {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\mipmap-xxxhdpi\\ic_launcher_foreground.webp"
-    },
-    {
-        "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\drawable_img_overwhelmed.png.flat",
-        "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\drawable\\img_overwhelmed.png"
     },
     {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\layout_activity_main.xml.flat",
@@ -38,10 +38,6 @@
     {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\drawable_bg_rounded_card.xml.flat",
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\drawable\\bg_rounded_card.xml"
-    },
-    {
-        "merged": "com.steadyme.app-debug-52:/layout_item_mood_log.xml.flat",
-        "source": "com.steadyme.app-main-54:/layout/item_mood_log.xml"
     },
     {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\font_sf_pro_rounded_heavy.otf.flat",
@@ -100,10 +96,6 @@
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\font\\sf_pro_rounded_semibold.otf"
     },
     {
-        "merged": "com.steadyme.app-debug-52:/layout_activity_camera_log.xml.flat",
-        "source": "com.steadyme.app-main-54:/layout/activity_camera_log.xml"
-    },
-    {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\drawable_img_calm.png.flat",
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\drawable\\img_calm.png"
     },
@@ -122,6 +114,10 @@
     {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\layout_activity_camera_log.xml.flat",
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_camera_log.xml"
+    },
+    {
+        "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\layout_fragment_notifications.xml.flat",
+        "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\fragment_notifications.xml"
     },
     {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\font_sfpro.xml.flat",
@@ -156,20 +152,32 @@
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_add_note.xml"
     },
     {
+        "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\layout_activity_mood_intensity.xml.flat",
+        "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_mood_intensity.xml"
+    },
+    {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\drawable_img_anxious.png.flat",
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\drawable\\img_anxious.png"
+    },
+    {
+        "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\layout_activity_triggers.xml.flat",
+        "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_triggers.xml"
     },
     {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\font_sf_pro_rounded_regular.otf.flat",
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\font\\sf_pro_rounded_regular.otf"
     },
     {
-        "merged": "com.steadyme.app-debug-52:/layout_fragment_home.xml.flat",
-        "source": "com.steadyme.app-main-54:/layout/fragment_home.xml"
+        "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\layout_activity_reasons.xml.flat",
+        "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\activity_reasons.xml"
     },
     {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\drawable_img_happy.png.flat",
         "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\drawable\\img_happy.png"
+    },
+    {
+        "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\layout_item_notification.xml.flat",
+        "source": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-main-54:\\layout\\item_notification.xml"
     },
     {
         "merged": "C:\\Users\\Precious\\.gradle\\daemon\\9.3.0\\com.steadyme.app-debug-52:\\drawable_img_angry.png.flat",

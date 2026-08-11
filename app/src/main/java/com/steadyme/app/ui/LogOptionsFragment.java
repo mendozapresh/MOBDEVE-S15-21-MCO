@@ -10,7 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.steadyme.app.CameraLogActivity;
+import com.steadyme.app.R;
 import com.steadyme.app.databinding.FragmentLogOptionsBinding;
 
 public class LogOptionsFragment extends Fragment {
@@ -26,7 +28,7 @@ public class LogOptionsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         binding.cardManual.setOnClickListener(v -> getParentFragmentManager().beginTransaction()
-                .replace(com.steadyme.app.R.id.fragmentContainer, new ManualLogFragment())
+                .replace(R.id.fragmentContainer, new ManualLogFragment())
                 .addToBackStack(null)
                 .commit());
 

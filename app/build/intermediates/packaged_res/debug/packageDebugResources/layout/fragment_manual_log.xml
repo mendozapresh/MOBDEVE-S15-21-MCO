@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:background="@color/white"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="74dp"
+    android:paddingBottom="20dp">
+
+
+
 
     <ImageButton
         android:id="@+id/btnBackManual"
@@ -74,7 +80,8 @@
                     android:layout_height="56dp"
                     android:background="@drawable/bg_circle_filled"
                     android:backgroundTint="@color/mood_happy_pale"
-                    android:scaleType="centerInside"
+                    android:scaleType="fitCenter"
+                    android:padding="0dp"
                     android:src="@drawable/img_happy" />
 
 
@@ -106,7 +113,8 @@
                     android:layout_height="56dp"
                     android:background="@drawable/bg_circle_filled"
                     android:backgroundTint="@color/mood_elated_pale"
-                    android:scaleType="centerInside"
+                    android:scaleType="fitCenter"
+                    android:padding="0dp"
                     android:src="@drawable/img_elated" />
 
 
@@ -138,7 +146,8 @@
                     android:layout_height="56dp"
                     android:background="@drawable/bg_circle_filled"
                     android:backgroundTint="@color/mood_calm_pale"
-                    android:scaleType="centerInside"
+                    android:scaleType="fitCenter"
+                    android:padding="0dp"
                     android:src="@drawable/img_calm" />
 
 
@@ -170,7 +179,8 @@
                     android:layout_height="56dp"
                     android:background="@drawable/bg_circle_filled"
                     android:backgroundTint="@color/mood_tired_pale"
-                    android:scaleType="centerInside"
+                    android:scaleType="fitCenter"
+                    android:padding="0dp"
                     android:src="@drawable/img_tired" />
 
 
@@ -210,7 +220,8 @@
                     android:layout_height="56dp"
                     android:background="@drawable/bg_circle_filled"
                     android:backgroundTint="@color/mood_sad_pale"
-                    android:scaleType="centerInside"
+                    android:scaleType="fitCenter"
+                    android:padding="0dp"
                     android:src="@drawable/img_sad" />
 
 
@@ -242,7 +253,8 @@
                     android:layout_height="56dp"
                     android:background="@drawable/bg_circle_filled"
                     android:backgroundTint="@color/mood_anxious_pale"
-                    android:scaleType="centerInside"
+                    android:scaleType="fitCenter"
+                    android:padding="0dp"
                     android:src="@drawable/img_anxious" />
 
 
@@ -274,7 +286,8 @@
                     android:layout_height="56dp"
                     android:background="@drawable/bg_circle_filled"
                     android:backgroundTint="@color/mood_frustrated_pale"
-                    android:scaleType="centerInside"
+                    android:scaleType="fitCenter"
+                    android:padding="0dp"
                     android:src="@drawable/img_overwhelmed" />
 
 
@@ -306,7 +319,8 @@
                     android:layout_height="56dp"
                     android:background="@drawable/bg_circle_filled"
                     android:backgroundTint="@color/mood_angry_pale"
-                    android:scaleType="centerInside"
+                    android:scaleType="fitCenter"
+                    android:padding="0dp"
                     android:src="@drawable/img_angry" />
 
 

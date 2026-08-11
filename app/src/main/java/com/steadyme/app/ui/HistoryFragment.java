@@ -1,6 +1,7 @@
 package com.steadyme.app.ui;
 
 import android.os.Bundle;
+import android.content.res.ColorStateList;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -25,6 +27,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class HistoryFragment extends Fragment {
+
     private FragmentHistoryBinding binding;
     private ListenerRegistration registration;
     private final MoodLogAdapter adapter = new MoodLogAdapter();
@@ -59,9 +62,13 @@ public class HistoryFragment extends Fragment {
     }
 
     private void setupFilters() {
-        binding.chipGroupFilters.setOnCheckedStateChangeListener((group, checkedIds) -> applyFilters());
+        binding.chipGroupFilters.setOnCheckedStateChangeListener((group, checkedIds) -> {
+            updateChipStyles();
+            applyFilters();
+        });
 
         binding.etSearch.addTextChangedListener(new TextWatcher() {
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
@@ -76,7 +83,10 @@ public class HistoryFragment extends Fragment {
     private void applyFilters() {
         if (allLogs == null) return;
 
+        updateChipStyles();
+
         String query = binding.etSearch.getText().toString().toLowerCase(Locale.getDefault()).trim();
+
         int checkedId = binding.chipGroupFilters.getCheckedChipId();
         String selectedEmotion = "";
 
@@ -105,6 +115,36 @@ public class HistoryFragment extends Fragment {
         binding.tvEmptyHistory.setVisibility(filtered.isEmpty() ? View.VISIBLE : View.GONE);
         binding.tvEntryCount.setText(filtered.size() + " ENTRIES");
     }
+
+    private void updateChipStyles() {
+        for (int i = 0; i < binding.chipGroupFilters.getChildCount(); i++) {
+            View view = binding.chipGroupFilters.getChildAt(i);
+
+            if (view instanceof Chip) {
+                Chip chip = (Chip) view;
+                boolean isChecked = chip.isChecked();
+                String emotion = chip.getText().toString();
+
+                if (chip.getId() == R.id.chipAll) {
+                    boolean isCheckedAll = chip.isChecked();
+                    chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), isCheckedAll ? R.color.primary : R.color.gray_100)));
+                    chip.setTextColor(ContextCompat.getColor(requireContext(), isCheckedAll ? R.color.white : R.color.gray_600));
+                    continue;
+                }
+
+                if (isChecked) {
+                    chip.setChipBackgroundColor(ColorStateList.valueOf(MoodPalette.paleColor(requireContext(), emotion)));
+                    chip.setTextColor(MoodPalette.color(requireContext(), emotion));
+                } else {
+                    chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray_100)));
+                    chip.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_600));
+                }
+
+
+            }
+        }
+    }
+
 
 
     @Override

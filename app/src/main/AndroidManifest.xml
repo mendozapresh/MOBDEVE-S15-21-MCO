@@ -16,6 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CameraLogActivity" />
+        <activity android:name=".MoodIntensityActivity" />
+        <activity android:name=".ReasonsActivity" />
         <activity android:name=".AddNoteActivity" />
         <activity android:name=".EntrySavedActivity" />
         <activity android:name=".MainActivity" />

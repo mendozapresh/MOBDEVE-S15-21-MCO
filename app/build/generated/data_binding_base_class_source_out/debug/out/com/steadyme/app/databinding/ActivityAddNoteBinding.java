@@ -34,14 +34,18 @@ public final class ActivityAddNoteBinding implements ViewBinding {
   @NonNull
   public final TextView tvNoteHint;
 
+  @NonNull
+  public final TextView tvNoteTitle;
+
   private ActivityAddNoteBinding(@NonNull ConstraintLayout rootView,
       @NonNull ImageButton btnBackNote, @NonNull MaterialButton btnSaveNote,
-      @NonNull EditText etNote, @NonNull TextView tvNoteHint) {
+      @NonNull EditText etNote, @NonNull TextView tvNoteHint, @NonNull TextView tvNoteTitle) {
     this.rootView = rootView;
     this.btnBackNote = btnBackNote;
     this.btnSaveNote = btnSaveNote;
     this.etNote = etNote;
     this.tvNoteHint = tvNoteHint;
+    this.tvNoteTitle = tvNoteTitle;
   }
 
   @Override
@@ -95,8 +99,14 @@ public final class ActivityAddNoteBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvNoteTitle;
+      TextView tvNoteTitle = ViewBindings.findChildViewById(rootView, id);
+      if (tvNoteTitle == null) {
+        break missingId;
+      }
+
       return new ActivityAddNoteBinding((ConstraintLayout) rootView, btnBackNote, btnSaveNote,
-          etNote, tvNoteHint);
+          etNote, tvNoteHint, tvNoteTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

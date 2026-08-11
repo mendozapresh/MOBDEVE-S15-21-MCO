@@ -10,10 +10,13 @@ import com.steadyme.app.data.FirebaseRepository;
 import com.steadyme.app.databinding.ActivityAddNoteBinding;
 import com.steadyme.app.model.MoodLog;
 
+import java.util.List;
+
 public class AddNoteActivity extends AppCompatActivity {
     public static final String EXTRA_EMOTION = "extra_emotion";
     public static final String EXTRA_SCORE = "extra_score";
     public static final String EXTRA_SOURCE = "extra_source";
+    public static final String EXTRA_REASONS = "extra_reasons";
 
     private ActivityAddNoteBinding binding;
 
@@ -24,16 +27,22 @@ public class AddNoteActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.btnBackNote.setOnClickListener(v -> finish());
+        binding.btnBackNote.bringToFront();
         binding.btnSaveNote.setOnClickListener(v -> save());
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     private void save() {
         String emotion = getIntent().getStringExtra(EXTRA_EMOTION);
-        int score = getIntent().getIntExtra(EXTRA_SCORE, 5);
+        int score = getIntent().getIntExtra(EXTRA_SCORE, 3);
         String source = getIntent().getStringExtra(EXTRA_SOURCE);
+        List<String> reasons = getIntent().getStringArrayListExtra(EXTRA_REASONS);
         String notes = binding.etNote.getText() == null ? "" : binding.etNote.getText().toString().trim();
 
-        // Safety check for emotion
         if (emotion == null || emotion.isEmpty()) {
             Toast.makeText(this, "Emotion data missing. Please try again.", Toast.LENGTH_SHORT).show();
             finish();
@@ -43,19 +52,18 @@ public class AddNoteActivity extends AppCompatActivity {
         binding.btnSaveNote.setEnabled(false);
 
         try {
-            // We proceed immediately to the success screen. 
-            // Firestore's local persistence ensures the data is "saved" to the UI 
-            // instantly, while background sync handles the server upload.
-            new FirebaseRepository().saveMood(new MoodLog(emotion, notes, source, score), new FirebaseRepository.SaveCallback() {
+            if (score <= 2) {
+                NotificationHelper.showNotification(this, "We're here for you", "You logged a low mood. Remember to reach out if you need support.");
+            }
+
+            MoodLog log = new MoodLog(emotion, notes, source, score, reasons);
+            new FirebaseRepository().saveMood(log, new FirebaseRepository.SaveCallback() {
                 @Override
                 public void onSaved() {
-                    // Already proceeded, but we could log success here
                 }
 
                 @Override
                 public void onError(Exception e) {
-                    // If a fatal error occurs (e.g. not signed in), Firestore might still 
-                    // trigger this, though usually it just queues the work.
                 }
             });
 
@@ -69,5 +77,4 @@ public class AddNoteActivity extends AppCompatActivity {
             Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
-
 }

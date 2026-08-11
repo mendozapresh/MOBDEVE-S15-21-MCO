@@ -24,22 +24,36 @@
         <item name="cornerSize">16dp</item>
     </style>
 
+    <style name="ShapeAppearance.SteadyMe.Capsule" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+
     <style name="TextAppearance.SteadyMe.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">36sp</item>
     </style>
     <style name="TextAppearance.SteadyMe.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">32sp</item>
     </style>
     <style name="TextAppearance.SteadyMe.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">28sp</item>
     </style>
     <style name="TextAppearance.SteadyMe.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">26sp</item>
     </style>
     <style name="TextAppearance.SteadyMe.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
     </style>
     <style name="TextAppearance.SteadyMe.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
     </style>
+
+
 </resources>

@@ -38,6 +38,12 @@ public final class FragmentHistoryBinding implements ViewBinding {
   public final Chip chipCalm;
 
   @NonNull
+  public final Chip chipElated;
+
+  @NonNull
+  public final Chip chipFrustrated;
+
+  @NonNull
   public final ChipGroup chipGroupFilters;
 
   @NonNull
@@ -72,16 +78,19 @@ public final class FragmentHistoryBinding implements ViewBinding {
 
   private FragmentHistoryBinding(@NonNull ConstraintLayout rootView, @NonNull Chip chipAll,
       @NonNull Chip chipAngry, @NonNull Chip chipAnxious, @NonNull Chip chipCalm,
-      @NonNull ChipGroup chipGroupFilters, @NonNull Chip chipHappy, @NonNull Chip chipSad,
-      @NonNull Chip chipTired, @NonNull TextInputEditText etSearch,
-      @NonNull RecyclerView rvMoodHistory, @NonNull HorizontalScrollView scrollFilters,
-      @NonNull TextInputLayout tilSearch, @NonNull TextView tvEmptyHistory,
-      @NonNull TextView tvEntryCount, @NonNull TextView tvHistoryTitle) {
+      @NonNull Chip chipElated, @NonNull Chip chipFrustrated, @NonNull ChipGroup chipGroupFilters,
+      @NonNull Chip chipHappy, @NonNull Chip chipSad, @NonNull Chip chipTired,
+      @NonNull TextInputEditText etSearch, @NonNull RecyclerView rvMoodHistory,
+      @NonNull HorizontalScrollView scrollFilters, @NonNull TextInputLayout tilSearch,
+      @NonNull TextView tvEmptyHistory, @NonNull TextView tvEntryCount,
+      @NonNull TextView tvHistoryTitle) {
     this.rootView = rootView;
     this.chipAll = chipAll;
     this.chipAngry = chipAngry;
     this.chipAnxious = chipAnxious;
     this.chipCalm = chipCalm;
+    this.chipElated = chipElated;
+    this.chipFrustrated = chipFrustrated;
     this.chipGroupFilters = chipGroupFilters;
     this.chipHappy = chipHappy;
     this.chipSad = chipSad;
@@ -143,6 +152,18 @@ public final class FragmentHistoryBinding implements ViewBinding {
       id = R.id.chipCalm;
       Chip chipCalm = ViewBindings.findChildViewById(rootView, id);
       if (chipCalm == null) {
+        break missingId;
+      }
+
+      id = R.id.chipElated;
+      Chip chipElated = ViewBindings.findChildViewById(rootView, id);
+      if (chipElated == null) {
+        break missingId;
+      }
+
+      id = R.id.chipFrustrated;
+      Chip chipFrustrated = ViewBindings.findChildViewById(rootView, id);
+      if (chipFrustrated == null) {
         break missingId;
       }
 
@@ -213,8 +234,9 @@ public final class FragmentHistoryBinding implements ViewBinding {
       }
 
       return new FragmentHistoryBinding((ConstraintLayout) rootView, chipAll, chipAngry,
-          chipAnxious, chipCalm, chipGroupFilters, chipHappy, chipSad, chipTired, etSearch,
-          rvMoodHistory, scrollFilters, tilSearch, tvEmptyHistory, tvEntryCount, tvHistoryTitle);
+          chipAnxious, chipCalm, chipElated, chipFrustrated, chipGroupFilters, chipHappy, chipSad,
+          chipTired, etSearch, rvMoodHistory, scrollFilters, tilSearch, tvEmptyHistory,
+          tvEntryCount, tvHistoryTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

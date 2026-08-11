@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:background="@color/white"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="54dp"
+    android:paddingBottom="20dp">
 
     <TextView
         android:id="@+id/tvHistoryTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mood History"
-        android:textSize="28sp"
+        android:textSize="32sp"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilSearch"
@@ -21,11 +29,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="Search entries"
-        app:boxBackgroundMode="outline"
-        app:boxCornerRadiusBottomEnd="24dp"
-        app:boxCornerRadiusBottomStart="24dp"
-        app:boxCornerRadiusTopEnd="24dp"
-        app:boxCornerRadiusTopStart="24dp"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="@color/gray_100"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:boxCornerRadiusBottomEnd="32dp"
+        app:boxCornerRadiusBottomStart="32dp"
+        app:boxCornerRadiusTopEnd="32dp"
+        app:boxCornerRadiusTopStart="32dp"
+        app:hintEnabled="false"
         app:startIconDrawable="@android:drawable/ic_menu_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,9 +46,13 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etSearch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="Search entries"
+            android:paddingVertical="12dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <HorizontalScrollView
         android:id="@+id/scrollFilters"
@@ -61,6 +77,8 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 app:checkedIconVisible="false"
+                app:chipStrokeWidth="0dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.SteadyMe.Capsule"
                 android:text="All"
                 app:chipBackgroundColor="@color/primary"
                 android:textColor="@android:color/white" />
@@ -71,7 +89,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:checkedIconVisible="false"
-                android:text="Happy" />
+                app:chipStrokeWidth="0dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.SteadyMe.Capsule"
+                android:text="Happy"
+                app:chipBackgroundColor="@color/gray_100"
+                android:textColor="@color/gray_600" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipElated"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:checkedIconVisible="false"
+                app:chipStrokeWidth="0dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.SteadyMe.Capsule"
+                android:text="Elated"
+                app:chipBackgroundColor="@color/gray_100"
+                android:textColor="@color/gray_600" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipCalm"
@@ -79,7 +113,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:checkedIconVisible="false"
-                android:text="Calm" />
+                app:chipStrokeWidth="0dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.SteadyMe.Capsule"
+                android:text="Calm"
+                app:chipBackgroundColor="@color/gray_100"
+                android:textColor="@color/gray_600" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipAnxious"
@@ -87,7 +125,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:checkedIconVisible="false"
-                android:text="Anxious" />
+                app:chipStrokeWidth="0dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.SteadyMe.Capsule"
+                android:text="Anxious"
+                app:chipBackgroundColor="@color/gray_100"
+                android:textColor="@color/gray_600" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipSad"
@@ -95,7 +137,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:checkedIconVisible="false"
-                android:text="Sad" />
+                app:chipStrokeWidth="0dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.SteadyMe.Capsule"
+                android:text="Sad"
+                app:chipBackgroundColor="@color/gray_100"
+                android:textColor="@color/gray_600" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipFrustrated"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:checkedIconVisible="false"
+                app:chipStrokeWidth="0dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.SteadyMe.Capsule"
+                android:text="Frustrated"
+                app:chipBackgroundColor="@color/gray_100"
+                android:textColor="@color/gray_600" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipAngry"
@@ -103,7 +161,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:checkedIconVisible="false"
-                android:text="Angry" />
+                app:chipStrokeWidth="0dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.SteadyMe.Capsule"
+                android:text="Angry"
+                app:chipBackgroundColor="@color/gray_100"
+                android:textColor="@color/gray_600" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipTired"
@@ -111,7 +173,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:checkedIconVisible="false"
-                android:text="Tired" />
+                app:chipStrokeWidth="0dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.SteadyMe.Capsule"
+                android:text="Tired"
+                app:chipBackgroundColor="@color/gray_100"
+                android:textColor="@color/gray_600" />
+
+
+
+
+
 
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
@@ -121,13 +192,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:textColor="@color/text_secondary"
-        android:textSize="12sp"
+        android:textColor="@color/gray_600"
+        android:textSize="11sp"
         android:textStyle="bold"
-        tools:text="14 ENTRIES"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/scrollFilters"
-        xmlns:tools="http://schemas.android.com/tools" />
+        tools:text="14 ENTRIES" />
 
     <TextView
         android:id="@+id/tvEmptyHistory"

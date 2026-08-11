@@ -20,6 +20,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.steadyme.app.R;
@@ -48,14 +49,12 @@ public class InsightsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflating the ViewBinding class generated from your fragment_insights.xml
         binding = FragmentInsightsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        // Observing logs off the main thread via FirebaseRepository
         registration = new FirebaseRepository().observeMoodLogs(new FirebaseRepository.LogsCallback() {
             @Override
             public void onLoaded(List<MoodLog> logs) {
@@ -80,14 +79,14 @@ public class InsightsFragment extends Fragment {
 
     private void render(List<MoodLog> logs) {
         if (logs == null || logs.isEmpty()) {
-            binding.tvInsightSummary.setText("Log a mood to see your trends.");
+            binding.tvInsightSummary.setText("Log a mood to see your clinical trends.");
             return;
         }
 
         // --- 1. POPULATE EXISTING LINE CHART ---
         List<Entry> entries = new ArrayList<>();
         List<String> labels = new ArrayList<>();
-        int shown = Math.min(14, logs.size()); // Showing up to 14 for better trend data
+        int shown = Math.min(14, logs.size());
 
         for (int i = 0; i < shown; i++) {
             MoodLog log = logs.get(shown - 1 - i);
@@ -96,142 +95,204 @@ public class InsightsFragment extends Fragment {
         }
 
         int brandGreen = ContextCompat.getColor(requireContext(), R.color.primary);
-        LineDataSet data = new LineDataSet(entries, "Mood score");
-        data.setColor(brandGreen);
-        data.setCircleColor(brandGreen);
-        data.setLineWidth(3f);
-        binding.chartMood.setData(new LineData(data));
+        LineDataSet lineDataSet = new LineDataSet(entries, "Mood score");
+        lineDataSet.setColor(brandGreen);
+        lineDataSet.setCircleColor(brandGreen);
+        lineDataSet.setLineWidth(3f);
+        lineDataSet.setDrawValues(false); // Clean up UI
+
+        binding.chartMood.setData(new LineData(lineDataSet));
         binding.chartMood.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
         binding.chartMood.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         binding.chartMood.getAxisRight().setEnabled(false);
         binding.chartMood.getDescription().setEnabled(false);
+        binding.chartMood.getLegend().setEnabled(false); // Remove legend per user request
 
-        // Light theme adjustments for the Line Chart
         binding.chartMood.getXAxis().setTextColor(Color.BLACK);
         binding.chartMood.getAxisLeft().setTextColor(Color.BLACK);
-        binding.chartMood.getLegend().setTextColor(Color.BLACK);
-
-
         binding.chartMood.invalidate();
-        binding.tvInsightSummary.setText("Based on your last " + shown + " check-ins.");
 
-        // --- 2. CALCULATE METRICS (Total, Streak, Week, Distributions) ---
+        // --- 2. REASON DETECTION & TOP REASONS ---
+        Map<String, Integer> reasonCounts = new HashMap<>();
+        for (MoodLog log : logs) {
+            if (log.getReasons() != null) {
+                for (String r : log.getReasons()) {
+                    Integer current = reasonCounts.get(r);
+                    reasonCounts.put(r, (current == null ? 0 : current) + 1);
+                }
+            }
+        }
+
+        List<Map.Entry<String, Integer>> sortedReasons = new ArrayList<>(reasonCounts.entrySet());
+        sortedReasons.sort((a, b) -> b.getValue().compareTo(a.getValue()));
+
+        StringBuilder topReasonsText = new StringBuilder();
+        if (sortedReasons.isEmpty()) {
+            topReasonsText.append("No common reasons logged yet.");
+        } else {
+            int count = 0;
+            for (Map.Entry<String, Integer> entry : sortedReasons) {
+                if (count >= 5) break;
+                topReasonsText.append(count + 1).append(". ").append(entry.getKey())
+                        .append(" (").append(entry.getValue()).append(" times)\n");
+                count++;
+            }
+        }
+        binding.tvTopReasons.setText(topReasonsText.toString().trim());
+
+        binding.tvInsightSummary.setText("Based on last " + shown + " check-ins.");
+
+        // --- 3. CALCULATE METRICS ---
         binding.tvTotalLogs.setText(String.valueOf(logs.size()));
 
         Set<String> uniqueDaysThisWeek = new HashSet<>();
         Map<String, Integer> emotionDistribution = new HashMap<>();
-        int currentStreak = 0;
+        double totalScoreThisWeek = 0;
+        int logsThisWeek = 0;
 
         Calendar cal = Calendar.getInstance();
         long oneWeekAgoMillis = cal.getTimeInMillis() - TimeUnit.DAYS.toMillis(7);
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
 
-        Calendar lastDateProcessed = null;
-
-        // Assuming logs list is ordered Newest to Oldest
         for (MoodLog log : logs) {
-            if (log.getCreatedAt() == null) {
-                continue;
-            }
+            if (log.getCreatedAt() == null) continue;
 
             Date logDate = log.getCreatedAt().toDate();
             String dateString = fmt.format(logDate);
 
-            // Calculate Unique Days This Week (0/7 format)
             if (logDate.getTime() >= oneWeekAgoMillis) {
                 uniqueDaysThisWeek.add(dateString);
+                totalScoreThisWeek += log.getScore();
+                logsThisWeek++;
             }
 
-            // Pie Chart Distribution Count
-            // NOTE: Make sure 'getEmotion()' exists in your MoodLog model!
             String emotion = log.getEmotion() != null ? log.getEmotion() : "Unknown";
             emotionDistribution.put(emotion, emotionDistribution.getOrDefault(emotion, 0) + 1);
-
-            // Correct Day Streak Calculation (ignores multiple logs on the same day)
-            Calendar logCal = Calendar.getInstance();
-            logCal.setTime(logDate);
-            logCal.set(Calendar.HOUR_OF_DAY, 0);
-            logCal.set(Calendar.MINUTE, 0);
-            logCal.set(Calendar.SECOND, 0);
-            logCal.set(Calendar.MILLISECOND, 0);
-
-            if (lastDateProcessed == null) {
-                currentStreak = 1;
-                lastDateProcessed = logCal;
-            } else {
-                long diffInMillis = lastDateProcessed.getTimeInMillis() - logCal.getTimeInMillis();
-                long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillis);
-
-                if (diffInDays == 0) {
-                    // Same day log, ignore for streak
-                } else if (diffInDays == 1) {
-                    // Consecutive day!
-                    currentStreak++;
-                    lastDateProcessed = logCal;
-                } else {
-                    // Gap found, stop calculating streak
-                    // Note: If you want current streak to be 0 if they missed yesterday,
-                    // you would compare the first log to "today" here as well.
-                }
-            }
         }
 
+        int streak = calculateStreak(logs);
+        binding.tvDayStreak.setText(streak + "d");
         binding.tvThisWeek.setText(uniqueDaysThisWeek.size() + "/7");
-        binding.tvDayStreak.setText(currentStreak + "d");
 
-        // --- 3. DYNAMIC DESCRIPTION ---
-        generateDynamicDescription(emotionDistribution, uniqueDaysThisWeek.size());
+        double avgScore = logsThisWeek == 0 ? 0 : totalScoreThisWeek / logsThisWeek;
+        binding.tvAvgThisWeek.setText(String.format(Locale.getDefault(), "%.1f/5", avgScore));
 
-        // --- 4. POPULATE PIE CHART ---
+        double totalScoreAll = 0;
+        for (MoodLog log : logs) totalScoreAll += log.getScore();
+        double overallAvg = logs.isEmpty() ? 0 : totalScoreAll / logs.size();
+
+        // --- 4. DYNAMIC DESCRIPTION ---
+        generateDynamicDescription(emotionDistribution, uniqueDaysThisWeek.size(), overallAvg);
+
+        // --- 5. POPULATE PIE CHART ---
         setupPieChart(emotionDistribution);
 
-        // --- 5. CONSISTENCY METRICS ---
-        binding.tvAvgThisWeek.setText("AVG THIS WEEK\n" + (uniqueDaysThisWeek.isEmpty() ? "N/A" : uniqueDaysThisWeek.size() + " days"));
+        // --- 6. STABILITY ---
+        double stabilityPercent = calculateStability(logs);
 
-        // Mock consistency score (Based on 7 days)
-        int consistencyScore = Math.min((uniqueDaysThisWeek.size() * 100) / 7, 100);
-        binding.pbConsistency.setProgress(consistencyScore);
-        binding.tvScorePercent.setText(consistencyScore + "%");
-
-        if (consistencyScore >= 70) {
-            binding.tvStability.setText("STABILITY\nHighly Stable");
-            binding.tvStability.setTextColor(ContextCompat.getColor(requireContext(), R.color.stable_green));
+        if (stabilityPercent == -1) {
+            binding.tvStability.setText("N/A");
+            binding.tvStability.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_600));
+        } else if (stabilityPercent >= 70) {
+            if (overallAvg >= 3.5) {
+                binding.tvStability.setText("Highly Stable");
+                binding.tvStability.setTextColor(ContextCompat.getColor(requireContext(), R.color.stable_green));
+            } else {
+                binding.tvStability.setText("Persistent Low");
+                binding.tvStability.setTextColor(Color.BLACK);
+            }
         } else {
-            binding.tvStability.setText("STABILITY\nVariable");
-            binding.tvStability.setTextColor(ContextCompat.getColor(requireContext(), R.color.warning_orange));
+            binding.tvStability.setText("Unstable");
+            binding.tvStability.setTextColor(Color.BLACK);
         }
-
     }
 
-    private void generateDynamicDescription(Map<String, Integer> emotionCounts, int uniqueDaysThisWeek) {
+    private int calculateStreak(List<MoodLog> logs) {
+        if (logs == null || logs.isEmpty()) return 0;
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0); cal.set(Calendar.MINUTE, 0); cal.set(Calendar.SECOND, 0); cal.set(Calendar.MILLISECOND, 0);
+        long todayStart = cal.getTimeInMillis();
+        cal.add(Calendar.DAY_OF_YEAR, -1);
+        long yesterdayStart = cal.getTimeInMillis();
+
+        int streak = 0;
+        long lastDateStart = -1;
+        boolean hasCurrentActivity = false;
+
+        for (MoodLog log : logs) {
+            if (log.getCreatedAt() == null) continue;
+            Calendar logCal = Calendar.getInstance();
+            logCal.setTime(log.getCreatedAt().toDate());
+            logCal.set(Calendar.HOUR_OF_DAY, 0); logCal.set(Calendar.MINUTE, 0); logCal.set(Calendar.SECOND, 0); logCal.set(Calendar.MILLISECOND, 0);
+            long logStart = logCal.getTimeInMillis();
+
+            if (logStart == todayStart || logStart == yesterdayStart) hasCurrentActivity = true;
+
+            if (lastDateStart == -1) {
+                streak = 1;
+                lastDateStart = logStart;
+            } else if (logStart == lastDateStart) {
+                continue;
+            } else {
+                long diffDays = (lastDateStart - logStart) / (24 * 60 * 60 * 1000);
+                if (diffDays == 1) {
+                    streak++;
+                    lastDateStart = logStart;
+                } else break;
+            }
+        }
+        return hasCurrentActivity ? streak : 0;
+    }
+
+    private double calculateStability(List<MoodLog> logs) {
+        if (logs == null || logs.size() < 2) return -1;
+        double sumDiff = 0;
+        int count = 0;
+        for (int i = 0; i < logs.size() - 1; i++) {
+            sumDiff += Math.abs(logs.get(i).getScore() - logs.get(i + 1).getScore());
+            count++;
+        }
+        double avgDiff = sumDiff / count;
+        return Math.max(0, 100 - (avgDiff * 30));
+    }
+
+    private void generateDynamicDescription(Map<String, Integer> emotionCounts, int uniqueDaysThisWeek, double overallAvg) {
         if (uniqueDaysThisWeek == 0) {
-            binding.tvDynamicTitle.setText("Quiet Week");
-            binding.tvDynamicDesc.setText("You haven't logged any emotions recently. Check in to keep your streak alive!");
+            binding.tvDynamicTitle.setText("Awaiting Data");
+            binding.tvDynamicDesc.setText("Check in daily to build your clinical history. This helps identify reasons and mood cycles.");
             return;
         }
 
-        // Tally negative emotions to determine the string
-        int negativeEmotions = emotionCounts.getOrDefault("Anxious", 0)
-                + emotionCounts.getOrDefault("Sad", 0)
-                + emotionCounts.getOrDefault("Angry", 0)
-                + emotionCounts.getOrDefault("Frustrated", 0)
-                + emotionCounts.getOrDefault("Overwhelmed", 0);
-
+        int elevatedCount = getSafeCount(emotionCounts, "Elated") + getSafeCount(emotionCounts, "Happy");
         int total = 0;
-        for (int count : emotionCounts.values()) {
-            total += count;
+        for (Integer count : emotionCounts.values()) {
+            if (count != null) total += count;
         }
 
-        if (total > 0 && (negativeEmotions * 100 / total) > 50) {
-            binding.tvDynamicTitle.setText("Significant Mood Swing");
-            binding.tvDynamicTitle.setTextColor(ContextCompat.getColor(requireContext(), R.color.warning_orange));
-            binding.tvDynamicDesc.setText("A large mood shift was detected in recent entries. High variability may signal an oncoming episode.");
+        double elevatedRatio = total == 0 ? 0 : (double) elevatedCount / total;
+
+        if (binding.tvStability.getText().toString().contains("Unstable")) {
+            binding.tvDynamicTitle.setText("High Mood Variability");
+            binding.tvDynamicTitle.setTextColor(Color.BLACK);
+            binding.tvDynamicDesc.setText("Frequent shifts between mood extremes were detected. This variability can be a clinical marker for rapid cycling in affective disorders.");
+        } else if (overallAvg < 3.5) {
+            binding.tvDynamicTitle.setText("Persistent Low Mood");
+            binding.tvDynamicTitle.setTextColor(Color.BLACK);
+            binding.tvDynamicDesc.setText("Your emotions are consistently in the lower range. While stable (low variability), a persistent low baseline is a key clinical indicator of a depressive episode.");
+        } else if (elevatedRatio > 0.7 || overallAvg > 4.2) {
+            binding.tvDynamicTitle.setText("Elevated Phase Detected");
+            binding.tvDynamicTitle.setTextColor(Color.BLACK);
+            binding.tvDynamicDesc.setText("Your logs show a sustained pattern of elevated mood. This may indicate a hypomanic or manic phase. Monitor for lack of sleep or impulsivity.");
         } else {
-            binding.tvDynamicTitle.setText("Stable Mood");
+            binding.tvDynamicTitle.setText("Mood is Stabilizing");
             binding.tvDynamicTitle.setTextColor(ContextCompat.getColor(requireContext(), R.color.stable_green));
-            binding.tvDynamicDesc.setText("Your emotions have been mostly stable and positive. Keep up the great work!");
+            binding.tvDynamicDesc.setText("Your emotional baseline is showing healthy consistency in the 'up' range. Maintain your routine to support long-term mood stability.");
         }
+    }
 
+    private int getSafeCount(Map<String, Integer> map, String key) {
+        Integer val = map.get(key);
+        return val == null ? 0 : val;
     }
 
     private void setupPieChart(Map<String, Integer> emotionDistribution) {
@@ -239,23 +300,30 @@ public class InsightsFragment extends Fragment {
         List<Integer> colors = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : emotionDistribution.entrySet()) {
             pieEntries.add(new PieEntry(entry.getValue(), entry.getKey()));
-            colors.add(MoodPalette.color(requireContext(), entry.getKey()));
+            colors.add(MoodPalette.paleColor(requireContext(), entry.getKey()));
         }
 
         PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
         pieDataSet.setColors(colors);
-        pieDataSet.setValueTextColor(Color.WHITE);
+        pieDataSet.setValueTextColor(Color.BLACK);
         pieDataSet.setValueTextSize(14f);
+        // Custom formatter to remove .00 decimals
+        pieDataSet.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return String.valueOf((int) value);
+            }
+        });
 
         PieData pieData = new PieData(pieDataSet);
 
         binding.chartMoodDistribution.setData(pieData);
         binding.chartMoodDistribution.getDescription().setEnabled(false);
         binding.chartMoodDistribution.setDrawHoleEnabled(true);
-        binding.chartMoodDistribution.setHoleColor(Color.WHITE); // Light theme hole
+        binding.chartMoodDistribution.setHoleColor(Color.WHITE);
         binding.chartMoodDistribution.setTransparentCircleRadius(0f);
-        binding.chartMoodDistribution.getLegend().setTextColor(Color.BLACK); // Light theme legend
+        binding.chartMoodDistribution.getLegend().setTextColor(Color.BLACK);
+        binding.chartMoodDistribution.setDrawEntryLabels(false);
         binding.chartMoodDistribution.invalidate();
     }
-
 }

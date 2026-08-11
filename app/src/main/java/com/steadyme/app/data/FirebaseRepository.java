@@ -11,6 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
+import com.steadyme.app.model.AppNotification;
 import com.steadyme.app.model.MoodLog;
 
 import java.util.ArrayList;
@@ -25,19 +26,21 @@ public class FirebaseRepository {
 
     public interface LogsCallback {
         void onLoaded(List<MoodLog> logs);
+        void onError(Exception error);
+    }
 
+    public interface NotificationsCallback {
+        void onLoaded(List<AppNotification> notifications);
         void onError(Exception error);
     }
 
     public interface SaveCallback {
         void onSaved();
-
         void onError(Exception error);
     }
 
     public interface ProfileCallback {
         void onLoaded(Map<String, Object> data);
-
         void onError(Exception error);
     }
 
@@ -50,6 +53,14 @@ public class FirebaseRepository {
             throw new IllegalStateException("Please sign in first.");
         }
         return db.collection("users").document(user.getUid()).collection("moodLogs");
+    }
+
+    private CollectionReference notifications() {
+        FirebaseUser user = auth.getCurrentUser();
+        if (user == null) {
+            throw new IllegalStateException("Please sign in first.");
+        }
+        return db.collection("users").document(user.getUid()).collection("notifications");
     }
 
     public void saveMood(@NonNull MoodLog log, @NonNull SaveCallback callback) {
@@ -114,5 +125,37 @@ public class FirebaseRepository {
                     }
                 })
                 .addOnFailureListener(callback::onError);
+    }
+
+    public void saveNotification(String title, String message) {
+        try {
+            notifications().add(new AppNotification(title, message));
+        } catch (Exception ignored) {}
+    }
+
+    public ListenerRegistration observeNotifications(@NonNull NotificationsCallback callback) {
+        try {
+            return notifications().orderBy("createdAt", Query.Direction.DESCENDING)
+                    .addSnapshotListener((snap, e) -> {
+                        if (e != null) {
+                            callback.onError(e);
+                            return;
+                        }
+                        List<AppNotification> result = new ArrayList<>();
+                        if (snap != null) {
+                            for (DocumentSnapshot d : snap.getDocuments()) {
+                                AppNotification n = d.toObject(AppNotification.class);
+                                if (n != null) {
+                                    n.setId(d.getId());
+                                    result.add(n);
+                                }
+                            }
+                        }
+                        callback.onLoaded(result);
+                    });
+        } catch (Exception e) {
+            callback.onError(e);
+            return null;
+        }
     }
 }

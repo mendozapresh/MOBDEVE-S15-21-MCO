@@ -4,6 +4,7 @@ package com.steadyme.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -22,6 +23,9 @@ import java.lang.String;
 public final class ActivityCameraLogBinding implements ViewBinding {
   @NonNull
   private final ConstraintLayout rootView;
+
+  @NonNull
+  public final ImageButton btnBackCamera;
 
   @NonNull
   public final LinearLayout btnCamAngry;
@@ -46,9 +50,6 @@ public final class ActivityCameraLogBinding implements ViewBinding {
 
   @NonNull
   public final LinearLayout btnCamTired;
-
-  @NonNull
-  public final MaterialButton btnCloseCamera;
 
   @NonNull
   public final MaterialButton btnRetry;
@@ -81,17 +82,18 @@ public final class ActivityCameraLogBinding implements ViewBinding {
   public final TextView tvDetected;
 
   private ActivityCameraLogBinding(@NonNull ConstraintLayout rootView,
-      @NonNull LinearLayout btnCamAngry, @NonNull LinearLayout btnCamAnxious,
-      @NonNull LinearLayout btnCamCalm, @NonNull LinearLayout btnCamElated,
-      @NonNull LinearLayout btnCamFrustrated, @NonNull LinearLayout btnCamHappy,
-      @NonNull LinearLayout btnCamSad, @NonNull LinearLayout btnCamTired,
-      @NonNull MaterialButton btnCloseCamera, @NonNull MaterialButton btnRetry,
+      @NonNull ImageButton btnBackCamera, @NonNull LinearLayout btnCamAngry,
+      @NonNull LinearLayout btnCamAnxious, @NonNull LinearLayout btnCamCalm,
+      @NonNull LinearLayout btnCamElated, @NonNull LinearLayout btnCamFrustrated,
+      @NonNull LinearLayout btnCamHappy, @NonNull LinearLayout btnCamSad,
+      @NonNull LinearLayout btnCamTired, @NonNull MaterialButton btnRetry,
       @NonNull MaterialButton btnScan, @NonNull MaterialButton btnSwitchManual,
       @NonNull MaterialButton btnUseEmotion, @NonNull MaterialCardView cardCameraControls,
       @NonNull LinearLayout groupResult, @NonNull LinearLayout groupScan,
       @NonNull PreviewView previewCamera, @NonNull TextView tvCameraStatus,
       @NonNull TextView tvDetected) {
     this.rootView = rootView;
+    this.btnBackCamera = btnBackCamera;
     this.btnCamAngry = btnCamAngry;
     this.btnCamAnxious = btnCamAnxious;
     this.btnCamCalm = btnCamCalm;
@@ -100,7 +102,6 @@ public final class ActivityCameraLogBinding implements ViewBinding {
     this.btnCamHappy = btnCamHappy;
     this.btnCamSad = btnCamSad;
     this.btnCamTired = btnCamTired;
-    this.btnCloseCamera = btnCloseCamera;
     this.btnRetry = btnRetry;
     this.btnScan = btnScan;
     this.btnSwitchManual = btnSwitchManual;
@@ -140,6 +141,12 @@ public final class ActivityCameraLogBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btnBackCamera;
+      ImageButton btnBackCamera = ViewBindings.findChildViewById(rootView, id);
+      if (btnBackCamera == null) {
+        break missingId;
+      }
+
       id = R.id.btnCamAngry;
       LinearLayout btnCamAngry = ViewBindings.findChildViewById(rootView, id);
       if (btnCamAngry == null) {
@@ -185,12 +192,6 @@ public final class ActivityCameraLogBinding implements ViewBinding {
       id = R.id.btnCamTired;
       LinearLayout btnCamTired = ViewBindings.findChildViewById(rootView, id);
       if (btnCamTired == null) {
-        break missingId;
-      }
-
-      id = R.id.btnCloseCamera;
-      MaterialButton btnCloseCamera = ViewBindings.findChildViewById(rootView, id);
-      if (btnCloseCamera == null) {
         break missingId;
       }
 
@@ -254,9 +255,9 @@ public final class ActivityCameraLogBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityCameraLogBinding((ConstraintLayout) rootView, btnCamAngry, btnCamAnxious,
-          btnCamCalm, btnCamElated, btnCamFrustrated, btnCamHappy, btnCamSad, btnCamTired,
-          btnCloseCamera, btnRetry, btnScan, btnSwitchManual, btnUseEmotion, cardCameraControls,
+      return new ActivityCameraLogBinding((ConstraintLayout) rootView, btnBackCamera, btnCamAngry,
+          btnCamAnxious, btnCamCalm, btnCamElated, btnCamFrustrated, btnCamHappy, btnCamSad,
+          btnCamTired, btnRetry, btnScan, btnSwitchManual, btnUseEmotion, cardCameraControls,
           groupResult, groupScan, previewCamera, tvCameraStatus, tvDetected);
     }
     String missingId = rootView.getResources().getResourceName(id);

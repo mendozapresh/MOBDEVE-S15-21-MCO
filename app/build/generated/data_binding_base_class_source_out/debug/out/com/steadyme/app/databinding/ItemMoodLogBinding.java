@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,9 @@ public final class ItemMoodLogBinding implements ViewBinding {
   public final MaterialCardView cardMoodLog;
 
   @NonNull
+  public final LinearLayout llDetails;
+
+  @NonNull
   public final TextView tvDate;
 
   @NonNull
@@ -35,15 +39,34 @@ public final class ItemMoodLogBinding implements ViewBinding {
   @NonNull
   public final TextView tvNotes;
 
+  @NonNull
+  public final TextView tvScoreDetail;
+
+  @NonNull
+  public final TextView tvSourceDetail;
+
+  @NonNull
+  public final TextView tvTriggersDetail;
+
+  @NonNull
+  public final TextView tvTriggersLabel;
+
   private ItemMoodLogBinding(@NonNull MaterialCardView rootView,
-      @NonNull MaterialCardView cardMoodLog, @NonNull TextView tvDate, @NonNull TextView tvEmotion,
-      @NonNull ImageView tvMoodEmoji, @NonNull TextView tvNotes) {
+      @NonNull MaterialCardView cardMoodLog, @NonNull LinearLayout llDetails,
+      @NonNull TextView tvDate, @NonNull TextView tvEmotion, @NonNull ImageView tvMoodEmoji,
+      @NonNull TextView tvNotes, @NonNull TextView tvScoreDetail, @NonNull TextView tvSourceDetail,
+      @NonNull TextView tvTriggersDetail, @NonNull TextView tvTriggersLabel) {
     this.rootView = rootView;
     this.cardMoodLog = cardMoodLog;
+    this.llDetails = llDetails;
     this.tvDate = tvDate;
     this.tvEmotion = tvEmotion;
     this.tvMoodEmoji = tvMoodEmoji;
     this.tvNotes = tvNotes;
+    this.tvScoreDetail = tvScoreDetail;
+    this.tvSourceDetail = tvSourceDetail;
+    this.tvTriggersDetail = tvTriggersDetail;
+    this.tvTriggersLabel = tvTriggersLabel;
   }
 
   @Override
@@ -75,6 +98,12 @@ public final class ItemMoodLogBinding implements ViewBinding {
     missingId: {
       MaterialCardView cardMoodLog = (MaterialCardView) rootView;
 
+      id = R.id.llDetails;
+      LinearLayout llDetails = ViewBindings.findChildViewById(rootView, id);
+      if (llDetails == null) {
+        break missingId;
+      }
+
       id = R.id.tvDate;
       TextView tvDate = ViewBindings.findChildViewById(rootView, id);
       if (tvDate == null) {
@@ -99,8 +128,33 @@ public final class ItemMoodLogBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemMoodLogBinding((MaterialCardView) rootView, cardMoodLog, tvDate, tvEmotion,
-          tvMoodEmoji, tvNotes);
+      id = R.id.tvScoreDetail;
+      TextView tvScoreDetail = ViewBindings.findChildViewById(rootView, id);
+      if (tvScoreDetail == null) {
+        break missingId;
+      }
+
+      id = R.id.tvSourceDetail;
+      TextView tvSourceDetail = ViewBindings.findChildViewById(rootView, id);
+      if (tvSourceDetail == null) {
+        break missingId;
+      }
+
+      id = R.id.tvTriggersDetail;
+      TextView tvTriggersDetail = ViewBindings.findChildViewById(rootView, id);
+      if (tvTriggersDetail == null) {
+        break missingId;
+      }
+
+      id = R.id.tvTriggersLabel;
+      TextView tvTriggersLabel = ViewBindings.findChildViewById(rootView, id);
+      if (tvTriggersLabel == null) {
+        break missingId;
+      }
+
+      return new ItemMoodLogBinding((MaterialCardView) rootView, cardMoodLog, llDetails, tvDate,
+          tvEmotion, tvMoodEmoji, tvNotes, tvScoreDetail, tvSourceDetail, tvTriggersDetail,
+          tvTriggersLabel);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
