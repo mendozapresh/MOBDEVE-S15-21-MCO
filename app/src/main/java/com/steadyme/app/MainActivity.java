@@ -16,6 +16,7 @@ import com.steadyme.app.ui.HistoryFragment;
 import com.steadyme.app.ui.HomeFragment;
 import com.steadyme.app.ui.InsightsFragment;
 import com.steadyme.app.ui.LogOptionsFragment;
+import com.steadyme.app.ui.ProfileFragment;
 import com.steadyme.app.worker.ReminderWorker;
 
 import java.util.concurrent.TimeUnit;
@@ -55,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
             fragment = new HistoryFragment();
         } else if (id == R.id.nav_insights) {
             fragment = new InsightsFragment();
+        } else if (id == R.id.nav_profile) {
+            fragment = new ProfileFragment();
         } else {
             fragment = new HomeFragment();
         }
