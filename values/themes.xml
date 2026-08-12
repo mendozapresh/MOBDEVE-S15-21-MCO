@@ -1,0 +1,45 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.SteadyMe" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="android:fontFamily">@font/sfpro</item>
+        <item name="fontFamily">@font/sfpro</item>
+
+        <!-- Bold titles and headlines -->
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.SteadyMe.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.SteadyMe.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.SteadyMe.HeadlineSmall</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.SteadyMe.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.SteadyMe.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.SteadyMe.TitleSmall</item>
+
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Global Shape Styling -->
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.SteadyMe.MediumComponent</item>
+    </style>
+
+    <style name="ShapeAppearance.SteadyMe.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="TextAppearance.SteadyMe.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.SteadyMe.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.SteadyMe.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.SteadyMe.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.SteadyMe.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.SteadyMe.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

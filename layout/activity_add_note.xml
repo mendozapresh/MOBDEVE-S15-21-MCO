@@ -26,9 +26,9 @@
         android:textColor="#000000"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/btnBackNote"
         app:layout_constraintBottom_toBottomOf="@id/btnBackNote"
-        app:layout_constraintStart_toEndOf="@id/btnBackNote" />
+        app:layout_constraintStart_toEndOf="@id/btnBackNote"
+        app:layout_constraintTop_toTopOf="@id/btnBackNote" />
 
     <TextView
         android:id="@+id/tvNoteHint"
@@ -37,9 +37,9 @@
         android:layout_marginTop="32dp"
         android:text="Anything else? (optional)"
         android:textColor="#666666"
-        app:layout_constraintTop_toBottomOf="@id/btnBackNote"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/btnBackNote" />
 
     <EditText
         android:id="@+id/etNote"
@@ -48,12 +48,12 @@
         android:layout_marginTop="12dp"
         android:background="#F5F5F5"
         android:gravity="top|start"
-        android:padding="16dp"
         android:hint="Write about your day, thoughts, or anything you want to remember."
         android:inputType="textMultiLine"
-        app:layout_constraintTop_toBottomOf="@id/tvNoteHint"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvNoteHint" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSaveNote"
@@ -63,8 +63,8 @@
         android:text="Save mood"
         android:textColor="#FFFFFF"
         app:backgroundTint="#8EB95A "
-        app:layout_constraintTop_toBottomOf="@id/etNote"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/etNote" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

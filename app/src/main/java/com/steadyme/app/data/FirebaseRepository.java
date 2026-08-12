@@ -13,6 +13,7 @@ import java.util.*;
 public class FirebaseRepository {
     public interface LogsCallback { void onLoaded(List<MoodLog> logs); void onError(Exception error); }
     public interface SaveCallback { void onSaved(); void onError(Exception error); }
+    public interface ProfileCallback { void onLoaded(Map<String, Object> data); void onError(Exception error); }
     private final FirebaseAuth auth=FirebaseAuth.getInstance();
     private final FirebaseFirestore db=FirebaseFirestore.getInstance();
     private CollectionReference logs(){ FirebaseUser user=auth.getCurrentUser(); if(user==null) throw new IllegalStateException("Please sign in first."); return db.collection("users").document(user.getUid()).collection("moodLogs"); }
@@ -25,4 +26,18 @@ public class FirebaseRepository {
         catch(Exception e){ callback.onError(e); return null; }
     }
     public void createProfile(String name){ FirebaseUser user=auth.getCurrentUser(); if(user!=null) db.collection("users").document(user.getUid()).set(new HashMap<String,Object>(){{put("name",name);put("email",user.getEmail());put("createdAt", FieldValue.serverTimestamp());}}, SetOptions.merge()); }
+
+    public void getProfile(@NonNull ProfileCallback callback) {
+        FirebaseUser user = auth.getCurrentUser();
+        if (user == null) {
+            callback.onError(new IllegalStateException("User not signed in"));
+            return;
+        }
+        db.collection("users").document(user.getUid()).get()
+                .addOnSuccessListener(snap -> {
+                    if (snap.exists()) callback.onLoaded(snap.getData());
+                    else callback.onError(new Exception("Profile not found"));
+                })
+                .addOnFailureListener(callback::onError);
+    }
 }
