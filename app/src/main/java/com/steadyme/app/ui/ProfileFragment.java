@@ -12,14 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.steadyme.app.LoginActivity;
+import com.steadyme.app.data.FirebaseRepository;
 import com.steadyme.app.databinding.FragmentProfileBinding;
+
+import java.util.Map;
 
 public class ProfileFragment extends Fragment {
 
@@ -50,30 +49,27 @@ public class ProfileFragment extends Fragment {
         if (user != null) {
             binding.tvUserEmail.setText(user.getEmail());
 
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            db.collection("Users").document(user.getUid())
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                if (document != null && document.exists()) {
-                                    String fullName = document.getString("name");
-                                    if (fullName != null && !fullName.isEmpty()) {
-                                        binding.tvUserName.setText(fullName);
-                                    } else {
-                                        binding.tvUserName.setText("SteadyMe User");
-                                    }
-                                } else {
-                                    Log.d(TAG, "No user document found in Firestore.");
-                                    binding.tvUserName.setText("SteadyMe User");
-                                }
-                            } else {
-                                Log.e(TAG, "Error fetching user data: ", task.getException());
-                            }
+            new FirebaseRepository().getProfile(new FirebaseRepository.ProfileCallback() {
+                @Override
+                public void onLoaded(Map<String, Object> data) {
+                    if (data != null && binding != null) {
+                        String fullName = (String) data.get("name");
+                        if (fullName != null && !fullName.isEmpty()) {
+                            binding.tvUserName.setText(fullName);
+                        } else {
+                            binding.tvUserName.setText("SteadyMe User");
                         }
-                    });
+                    }
+                }
+
+                @Override
+                public void onError(Exception error) {
+                    Log.e(TAG, "Error fetching user data: ", error);
+                    if (binding != null) {
+                        binding.tvUserName.setText("SteadyMe User");
+                    }
+                }
+            });
         } else {
             performLogout();
         }
