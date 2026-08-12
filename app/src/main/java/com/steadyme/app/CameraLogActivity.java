@@ -34,9 +34,8 @@ public class CameraLogActivity extends AppCompatActivity {
     private ActivityCameraLogBinding binding;
     private ExecutorService cameraExecutor;
     private volatile boolean faceDetected = false;
-    private volatile boolean eyebrowsFurrowed = false;
-    private volatile boolean eyebrowsRaised = false;
     private volatile Float latestSmiling, latestLeftEyeOpen, latestRightEyeOpen;
+    private volatile Float latestBrowRatio; // Distance ratio (inner brow to inner eye corner / eye width)
     private String pendingEmotion;
     private int pendingScore;
 
@@ -98,7 +97,7 @@ public class CameraLogActivity extends AppCompatActivity {
 
                 FaceDetector detector = FaceDetection.getClient(
                         new FaceDetectorOptions.Builder()
-                                .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
+                                .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE)
                                 .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_ALL)
                                 .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL)
                                 .build()
@@ -119,15 +118,22 @@ public class CameraLogActivity extends AppCompatActivity {
                                     latestLeftEyeOpen = face.getLeftEyeOpenProbability();
                                     latestRightEyeOpen = face.getRightEyeOpenProbability();
 
-                                    // Detect eyebrow movement
+                                    // Advanced Brow Tracking: Inner brow to inner eye corner ratio
                                     com.google.mlkit.vision.face.FaceContour leftBrow = face.getContour(com.google.mlkit.vision.face.FaceContour.LEFT_EYEBROW_TOP);
-                                    if (leftBrow != null && leftBrow.getPoints().size() >= 5) {
-                                        float innerY = leftBrow.getPoints().get(0).y;
-                                        float outerY = leftBrow.getPoints().get(4).y;
-                                        // Inner brow lower than outer brow = furrowed (Angry)
-                                        eyebrowsFurrowed = innerY > (outerY + 8);
-                                        // Inner brow higher than outer brow = raised (Anxious)
-                                        eyebrowsRaised = innerY < (outerY - 5);
+                                    com.google.mlkit.vision.face.FaceContour leftEye = face.getContour(com.google.mlkit.vision.face.FaceContour.LEFT_EYE);
+
+                                    if (leftBrow != null && leftEye != null && leftBrow.getPoints().size() >= 5 && leftEye.getPoints().size() >= 9) {
+                                        android.graphics.PointF browInner = leftBrow.getPoints().get(0); // Near nose
+                                        android.graphics.PointF eyeInner = leftEye.getPoints().get(0);   // Near nose
+                                        android.graphics.PointF eyeOuter = leftEye.getPoints().get(8);   // Near temple
+
+                                        // Distance formula: sqrt((x2-x1)^2 + (y2-y1)^2)
+                                        float distBrowEye = (float) Math.hypot(browInner.x - eyeInner.x, browInner.y - eyeInner.y);
+                                        float eyeWidth = (float) Math.hypot(eyeOuter.x - eyeInner.x, eyeOuter.y - eyeInner.y);
+
+                                        if (eyeWidth > 0) {
+                                            latestBrowRatio = distBrowEye / eyeWidth;
+                                        }
                                     }
                                 }
 
@@ -169,34 +175,37 @@ public class CameraLogActivity extends AppCompatActivity {
         float leftOpen = latestLeftEyeOpen == null ? 0.9f : latestLeftEyeOpen;
         float rightOpen = latestRightEyeOpen == null ? 0.9f : latestRightEyeOpen;
         float avgEyesOpen = (leftOpen + rightOpen) / 2f;
+        float browRatio = latestBrowRatio == null ? 0.50f : latestBrowRatio;
+
+        Log.d(TAG, String.format("Scan Stats: Smile=%.2f, Eyes=%.2f, BrowRatio=%.2f", smiling, avgEyesOpen, browRatio));
         
         String emotion;
         int score;
 
-        // Refined Clinical Emotion Detection Logic
-        if (smiling >= 0.85f) {
+        // Refined Clinical Emotion Detection Logic using Accurate Mode Data
+        if (smiling >= 0.95f) {
             emotion = "Elated";
             score = 5;
-        } else if (smiling >= 0.45f) {
+        } else if (smiling >= 0.30f) {
             emotion = "Happy";
             score = 4;
-        } else if (avgEyesOpen <= 0.35f) {
+        } else if (avgEyesOpen <= 0.30f) {
             emotion = "Tired";
             score = 2;
-        } else if (eyebrowsFurrowed && smiling <= 0.12f) {
-            // ANGRY: Furrowed brows (turned down) + No smile
+        } else if (browRatio <= 0.42f && smiling <= 0.15f) {
+            // ANGRY: Low brow (furrowed) + No smile
             emotion = "Angry";
             score = 1;
-        } else if (eyebrowsFurrowed && avgEyesOpen <= 0.75f) {
-            // FRUSTRATED: Stressed look (furrowed + eye tension)
+        } else if (browRatio <= 0.42f) {
+            // FRUSTRATED: Low brow with some facial movement
             emotion = "Frustrated";
             score = 2;
-        } else if (eyebrowsRaised) {
-            // ANXIOUS: Brows turned up (Raised inner brows)
+        } else if (browRatio >= 0.58f && smiling <= 0.15f) {
+            // ANXIOUS: High inner brow (raised) + No smile
             emotion = "Anxious";
             score = 2;
-        } else if (smiling <= 0.12f) {
-            // SAD: Frown (Low smile probability)
+        } else if (smiling <= 0.10f || (browRatio >= 0.56f && smiling <= 0.20f)) {
+            // SAD: Flat affect or slightly raised brow with no smile
             emotion = "Sad";
             score = 1;
         } else {
