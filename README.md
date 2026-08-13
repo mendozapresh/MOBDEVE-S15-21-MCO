@@ -22,8 +22,6 @@ SteadyMe is a native Android application designed to help users track and reflec
 - WorkManager handles scheduled daily notifications. Notification permission is requested on Android 13 and later.
 - MPAndroidChart is used to display the user's mood scores and recent mood trends.
 
-## Data and Privacy
-Mood records are stored in Cloud Firestore under the authenticated user's account. Firestore security rules should be configured to prevent users from accessing another user's records.
 
 # MOBDEVE-S15-21-MCO
 >>>>>>> 09d959842802eb0f1ee3e1c4b7cac8a00f57270c
